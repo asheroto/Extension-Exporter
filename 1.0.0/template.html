@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Extensions</title>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content="https://chrome.google.com/webstore/detail/UPDATE-ME" />
+
+		<style>
+			body {
+				margin: 0;
+				padding: 30px;
+				font-family: droid sans, segoe ui, ubuntu, sans-serif;
+			}
+
+			h2 {
+				margin: 0 0 5px 0;
+				font-size: 24px;
+				font-weight: bold;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 10px;
+			}
+
+			h2.disabled {
+				margin-top: 30px;
+			}
+
+			h2.enabled,
+			ol.enabled a {
+				color: #1b5e20;
+			}
+
+			h2.disabled,
+			ol.disabled a {
+				color: #b71c1c;
+			}
+
+			ol {
+				margin: 0;
+				padding: 0;
+			}
+
+			li {
+				margin: 0 0 5px 30px;
+				font-size: 16px;
+                list-style-type: square;
+			}
+
+			a {
+				text-decoration: none;
+                color: #3C4043;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h2 class="enabled">Enabled Extensions</h2>
+		<ol class="enabled">
+			{ENABLED}
+		</ol>
+
+		<h2 class="disabled">Disabled Extensions</h2>
+		<ol class="disabled">
+			{DISABLED}
+		</ol>
+	</body>
+</html>
+
+<!--
+......................................................
+                     Enabled Extensions
+......................................................
+
+{COMMENT_ENABLED}
+
+
+
+......................................................
+                     Disabled Extensions
+......................................................
+
+{COMMENT_DISABLED}
+-->

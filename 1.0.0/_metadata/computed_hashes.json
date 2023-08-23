@@ -1,0 +1,33 @@
+{
+    "file_hashes": [
+        {
+            "block_hashes": [
+                ""
+            ],
+            "block_size": 4096,
+            "path": "background.js"
+        },
+        {
+            "block_hashes": [
+                ""
+            ],
+            "block_size": 4096,
+            "path": "page.html"
+        },
+        {
+            "block_hashes": [
+                ""
+            ],
+            "block_size": 4096,
+            "path": "page.js"
+        },
+        {
+            "block_hashes": [
+                ""
+            ],
+            "block_size": 4096,
+            "path": "template.html"
+        }
+    ],
+    "version": 2
+}

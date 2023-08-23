@@ -1,0 +1,31 @@
+{
+    "action": {
+        "default_icon": "img/16.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "description": "Export name and URL of all installed extensions in Google Chrome",
+    "differential_fingerprint": "",
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "icons": {
+        "16": "img/16.png",
+        "48": "img/48.png",
+        "64": "img/64.png",
+        "128": "img/128.png"
+    },
+    "key": "",
+    "manifest_version": 3,
+    "name": "Export links of all extensions",
+    "offline_enabled": true,
+    "permissions": [
+        "alarms",
+        "declarativeNetRequest",
+        "management"
+    ],
+    "update_url": "https://clients2.google.com/service/update2/crx",
+    "version": "1.7"
+}

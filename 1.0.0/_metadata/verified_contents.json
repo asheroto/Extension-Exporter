@@ -1,0 +1,24 @@
+[
+    {
+        "description": "treehash per file",
+        "signed_content": {
+            "payload": "",
+            "signatures": [
+                {
+                    "header": {
+                        "kid": "publisher"
+                    },
+                    "protected": "",
+                    "signature": ""
+                },
+                {
+                    "header": {
+                        "kid": "webstore"
+                    },
+                    "protected": "",
+                    "signature": ""
+                }
+            ]
+        }
+    }
+]
