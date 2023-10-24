@@ -26,4 +26,4 @@ We value community contributions and encourage you to get involved. For issues, 
 -   To suggest new features, you can also submit an issue.
 -   If you wish to contribute code, we accept Pull Requests. Be sure to read our [contributing guidelines](https://github.com/asheroto/Extension-Exporter/blob/main/CONTRIBUTING.md) for the required code style.
 
-Detailed instructions on how to contribute can be found on the [contributing guidelines](https://github.com/asheroto/Extension-Exporter/blob/main/CONTRIBUTING.md) page. eThank you for helping to improve our Chrome extension.
+Detailed instructions on how to contribute can be found on the [contributing guidelines](https://github.com/asheroto/Extension-Exporter/blob/main/CONTRIBUTING.md) page Thank you for helping to improve our Chrome extension.
