@@ -14,12 +14,6 @@
 
 This extension is fully open-source to ensure transparency and security. You can view and contribute to the source code on [GitHub](https://github.com/asheroto/Extension-Exporter).
 
-## Why Choose Extension Exporter?
-
--   **Trustworthy**: This is a revamped, secure version of a previously removed extension.
--   **Transparency**: Being open-source, anyone can review the code to ensure its safety.
--   **Convenience**: Easily export all extension details into a readily accessible HTML file.
-
 ## Contributing
 
 Contributions are welcome! Please read the [contributing guidelines](https://github.com/asheroto/Extension-Exporter/blob/main/CONTRIBUTING.md) to get started.
