@@ -14,6 +14,10 @@ Extension Exporter is a Chrome extension designed to export the names and URLs o
 -   Easy-to-use: just click the extension button at the top-right of your browser and the HTML file is generated instantly
 -   All code runs locally: extension does not make any connection to remote servers
 
+## Chrome Web Store
+
+**Status:** pending approval
+
 ## Open Source
 
 This extension is fully open-source to ensure both transparency and security. You can view and even contribute to the source code by visiting our [GitHub repository](https://github.com/asheroto/Extension-Exporter).
