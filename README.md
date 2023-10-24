@@ -1,4 +1,4 @@
-https://github.com/asheroto/Extension-Exporter/assets/49938263/0409fdab-8626-43c3-a125-dcdc0e56ace3
+https://github.com/asheroto/Extension-Exporter/assets/49938263/c348aceb-dfaa-4e33-a903-c5886fb9a342
 
 # Extension Exporter
 
