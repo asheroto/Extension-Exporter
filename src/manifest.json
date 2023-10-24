@@ -6,7 +6,6 @@
         "service_worker": "background.js"
     },
     "description": "Export name and URL of all installed extensions in Google Chrome",
-    "differential_fingerprint": "",
     "host_permissions": [
         "http://*/*",
         "https://*/*"
@@ -17,7 +16,7 @@
         "64": "img/64.png",
         "128": "img/128.png"
     },
-    "key": "",
+    "key": "MMOpASIwDQoGCSrDpUjDpeKJiA0KAQEBBQADw6kBDwAww6kBDQoCw6kBAQDCsHsUBOKUrMKxwrXOo+KVq1HilZE7w5/DrDvCsMO8ZuKUrOKMoc6YP8KsIcK/XHQOGREzQVnPgOKVocOyJ0lB4pWUw6bilZHiiYgCwqLilpDiiJkWwrwx4paMflxgVsKlw6Aww6vilogC4pSc4pWVU3oh4pSQV2jilZlww7cWJuKVp1filZFyd8OmW8K6csOtTOKVn+KVlyYNCuKIqcOiQuKVrG1Bw6biiKnCsmZT4pWdacOg4pWgXDMX4pWVOVo+4paTQGTilZEkMM6Tec6Yd8O2fELDqUTCuxUT4pWXUeKVoiDijJBfa1h7CeKWksOGDQpkN15Tas6TISrilZvDhlwkAcOyfgYTFC/ilZMYZsK8J2ZKX+KBv+KVlk8R4pWm4pWeDQoGb8K3w67DtDrijKDCqsK1GeKVq8K3w7Y14pWf4pWYbw0KQXQj4oKnxpINCsOr4paQw6/ijJBVw7R3flcONgvDpcKgJeKWiOKVl0LijKAfK1HDiQ51w6LDvGkkwqJVNjbilZjDv8OgKGrilZkk4pWZ4paAQc60xpI74oyhaXspSB/ilZdRb3UCAwEAAQ0K",
     "manifest_version": 3,
     "name": "Export links of all extensions",
     "offline_enabled": true,
@@ -27,5 +26,5 @@
         "management"
     ],
     "update_url": "https://clients2.google.com/service/update2/crx",
-    "version": "1.7"
+    "version": "1.0"
 }
