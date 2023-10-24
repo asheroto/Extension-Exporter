@@ -1,4 +1,3 @@
-![Demo](https://raw.githubusercontent.com/asheroto/Extension-Exporter/main/images/screenshots/Demo.mp4)
 ![Demo](https://raw.githubusercontent.com/asheroto/Extension-Exporter/main/images/screenshots/Demo.gif)
 
 # Extension Exporter
