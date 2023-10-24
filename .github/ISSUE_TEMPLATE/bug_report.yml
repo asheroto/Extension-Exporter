@@ -1,0 +1,61 @@
+name: Bug report
+description: Template for bug reports
+title: '[Bug]: '
+assignees:
+- asheroto
+labels:
+- bug
+body:
+- type: markdown
+  attributes:
+    value: >-
+      Please check to see if your feature already exists in [Issues](https://github.com/asheroto/Extension-Exporter). #magic___^_^___line #magic___^_^___line **Name your issue appropriately:** give it a sentence that reads well enough for anyone seeing this in the release notes to know what it is. #magic___^_^___line #magic___^_^___line When writing out the issue details, please ensure you are writing it as if you were explaining it to somebody else, even if you will be working on and resolving the issue yourself. This helps others to understand the reasons for the issue and for it to be searchable in the future.
+- type: checkboxes
+  id: checklist
+  attributes:
+    label: Checklist
+    description: Before continuing, make sure you have done the following.
+    options:
+    - label: >-
+        I have restarted my computer to confirm this is not a transitory problem.
+      required: true
+    - label: >-
+        I have verified that I am using the latest version of my web browser.
+      required: true
+    - label: I am using the latest version of my web browser.
+      required: true
+    - label: >-
+        I have verified that this issue is NOT security related (please create [security advisory](https://github.com/asheroto/Extension-Exporter/security/advisories) if so).
+      required: true
+- type: input
+  id: operating-system
+  attributes:
+    label: Operating System
+    description: What is your current operating system and version?
+    placeholder: Windows 10 Pro x64 20H2
+  validations:
+    required: true
+- type: input
+  id: browser
+  attributes:
+    label: Browser
+    description: >-
+      What web browser and version are you using? You can usually find this information in the hamburger menu at the top right > Help > About.
+    placeholder: Chrome 90.0.4430.212
+  validations:
+    required: true
+- type: textarea
+  id: what-are-you-seeing
+  attributes:
+    label: What You Are Seeing?
+    description: >-
+      In your own words, please describe the problem that you are experiencing. Please include screenshots if possible, as this can give a clearer indication of the problem.
+  validations:
+    required: true
+- type: textarea
+  id: additional-context
+  attributes:
+    label: Additional Context
+    description: >-
+      Please include any other information here that you feel may be relevant to the problem you are seeing but is not covered in the previous sections.
+    placeholder: Screenshots, etc.

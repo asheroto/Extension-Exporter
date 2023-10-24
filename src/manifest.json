@@ -6,10 +6,6 @@
         "service_worker": "background.js"
     },
     "description": "Export name and URL of all installed extensions into an HTML file.",
-    "host_permissions": [
-        "http://*/*",
-        "https://*/*"
-    ],
     "icons": {
         "16": "img/16.png",
         "48": "img/48.png",
@@ -20,8 +16,6 @@
     "name": "Extension Exporter",
     "offline_enabled": true,
     "permissions": [
-        "alarms",
-        "declarativeNetRequest",
         "management"
     ],
     "update_url": "https://clients2.google.com/service/update2/crx",
