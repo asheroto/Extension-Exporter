@@ -13,9 +13,24 @@
 				font-family: droid sans, segoe ui, ubuntu, sans-serif;
 			}
 
+			h1.title {
+				font-size: 36px;
+				margin-bottom: 10px;
+			}
+
+			h3.subtitle {
+				font-size: 18px;
+				color: gray;
+				margin-bottom: 30px;
+			}
+
+			hr {
+				margin-bottom: 30px;
+			}
+
 			h2 {
+				font-size: 28px;
 				margin: 0 0 5px 0;
-				font-size: 24px;
 				font-weight: bold;
 				border-bottom: 1px solid #ddd;
 				padding-bottom: 10px;
@@ -54,10 +69,19 @@
 			a:hover {
 				text-decoration: underline;
 			}
+
+			h4.bottomText {
+				border-top: 1px solid #ddd;
+				padding-top: 10px;
+				margin-top: 30px;
+			}
 		</style>
 	</head>
 
 	<body>
+		<h1 class="title">Extension Export</h1>
+		<h3 class="subtitle">{TIMESTAMP}</h3>
+
 		<h2 class="enabled">Enabled Extensions</h2>
 		<ol class="enabled">
 			{ENABLED}
@@ -67,6 +91,8 @@
 		<ol class="disabled">
 			{DISABLED}
 		</ol>
+
+		<h4 class="bottomText">For a text-only view, right-click and View page source.</h4>
 	</body>
 </html>
 

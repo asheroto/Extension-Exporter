@@ -82,12 +82,16 @@
             // Retrieve the extension ID to populate the 'generator' meta tag in the HTML output
             let extensionId = chrome.runtime.id;
 
+            // Generate a timestamp based on the user's locale
+            let timestamp = new Date().toLocaleString();
+
             // Replace the placeholders in the template with the generated HTML
             template = template.replace('{ENABLED}', enabled.trim())
                 .replace('{DISABLED}', disabled.trim())
                 .replace('{COMMENT_ENABLED}', commentEnabled.trim())
                 .replace('{COMMENT_DISABLED}', commentDisabled.trim())
-                .replace('{EXTENSION_ID}', extensionId);
+                .replace('{EXTENSION_ID}', extensionId)
+                .replace('{TIMESTAMP}', timestamp); // Replacing the timestamp placeholder
 
             // Download the generated HTML file
             download(template, 'extensions.html');
