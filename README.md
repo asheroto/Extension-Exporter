@@ -10,7 +10,7 @@
 
 ## Open Source
 
-This extension is fully open-source to ensure transparency and security. You can view and contribute to the source code on [GitHub](https://github.com/asheroto/Extension-Exporter).
+This extension is fully open-source to ensure transparency and security. You can view and contribute to the source code on https://github.com/asheroto/Extension-Exporter
 
 ## Contributing
 
