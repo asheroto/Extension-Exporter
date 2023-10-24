@@ -77,7 +77,6 @@
             }
         });
 
-
         loadTemplate(function (template) {
             // Retrieve the extension ID to populate the 'generator' meta tag in the HTML output
             let extensionId = chrome.runtime.id;

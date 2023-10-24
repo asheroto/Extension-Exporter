@@ -6,6 +6,7 @@
         "service_worker": "background.js"
     },
     "description": "Export name and URL of all installed extensions into an HTML file.",
+    "homepage_url": "https://github.com/asheroto/Extension-Exporter",
     "icons": {
         "16": "img/16.png",
         "48": "img/48.png",
