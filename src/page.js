@@ -79,11 +79,17 @@
 
 
         loadTemplate(function (template) {
+            // Retrieve the extension ID to populate the 'generator' meta tag in the HTML output
+            let extensionId = chrome.runtime.id;
+
+            // Replace the placeholders in the template with the generated HTML
             template = template.replace('{ENABLED}', enabled.trim())
                 .replace('{DISABLED}', disabled.trim())
                 .replace('{COMMENT_ENABLED}', commentEnabled.trim())
-                .replace('{COMMENT_DISABLED}', commentDisabled.trim());
+                .replace('{COMMENT_DISABLED}', commentDisabled.trim())
+                .replace('{EXTENSION_ID}', extensionId);
 
+            // Download the generated HTML file
             download(template, 'extensions.html');
         });
     });
