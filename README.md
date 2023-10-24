@@ -1,7 +1,5 @@
 # Extension Exporter
 
-## Overview
-
 `Extension Exporter` is a Chrome extension designed to export the names and URLs of all your installed extensions into an HTML file. This extension is the reimagined edition of the previously available extension named `Export links of all Extensions`, which was removed from the Chrome Web Store due to security concerns. This extension is designed with security in mind, and is fully open-source to ensure transparency and safety. The icon has also been redesigned from the original.
 
 ## Features
