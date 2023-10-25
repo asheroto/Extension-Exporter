@@ -16,9 +16,7 @@ Extension Exporter is a Chrome extension designed to export the names and URLs o
 
 ## Installation
 
-This extension was submitted to Chrome Web Store for approval on October 24, 2021. Once approved, the extension will be available for download from the Chrome Web Store. 
-
-Until then, you can clone the repo and load the unpacked extension if you'd like.
+This extension is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb). This is the recommended installation approach. Alternatively you can install the CRX file in releases.
 
 ## Open Source
 
