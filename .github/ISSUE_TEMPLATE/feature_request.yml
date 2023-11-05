@@ -9,6 +9,8 @@ body:
 - type: markdown
   attributes:
     value: |
+      Please check to see if your feature already exists in [Issues](https://github.com/asheroto/Extension-Exporter/issues).
+
       Thanks for taking the time to fill out this feature request!
 - type: textarea
   id: feature
