@@ -1,6 +1,8 @@
 https://github.com/asheroto/Extension-Exporter/assets/49938263/c348aceb-dfaa-4e33-a903-c5886fb9a342
 
+[![Release](https://img.shields.io/github/v/release/asheroto/winget-install)](https://github.com/asheroto/winget-install/releases)
 [![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/asheroto/Extension-Exporter)](https://github.com/asheroto/Extension-Exporter/releases)
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/doikmfpjbcjjimnbablebijofdbgfepb?link=https%3A%2F%2Fimg.shields.io%2Fchrome-web-store%2Fusers%2Fdoikmfpjbcjjimnbablebijofdbgfepb)
 [![GitHub Downloads - All Releases](https://img.shields.io/github/downloads/asheroto/Extension-Exporter/total)](https://github.com/asheroto/Extension-Exporter/releases)
 [![GitHub Sponsor](https://img.shields.io/github/sponsors/asheroto?label=Sponsor&logo=GitHub)](https://github.com/sponsors/asheroto)
 <a href="https://ko-fi.com/asheroto"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Ko-Fi Button" height="20px"></a>
