@@ -2,7 +2,7 @@ https://github.com/asheroto/Extension-Exporter/assets/49938263/c348aceb-dfaa-4e3
 
 [![Release](https://img.shields.io/github/v/release/asheroto/Extension-Exporter)](https://github.com/asheroto/Extension-Exporter/releases)
 [![GitHub Release Date - Published_At](https://img.shields.io/github/release-date/asheroto/Extension-Exporter)](https://github.com/asheroto/Extension-Exporter/releases)
-![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/doikmfpjbcjjimnbablebijofdbgfepb?link=https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/doikmfpjbcjjimnbablebijofdbgfepb)](https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb)
 [![GitHub Downloads - All Releases](https://img.shields.io/github/downloads/asheroto/Extension-Exporter/total)](https://github.com/asheroto/Extension-Exporter/releases)
 [![GitHub Sponsor](https://img.shields.io/github/sponsors/asheroto?label=Sponsor&logo=GitHub)](https://github.com/sponsors/asheroto)
 <a href="https://ko-fi.com/asheroto"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Ko-Fi Button" height="20px"></a>
