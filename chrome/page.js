@@ -83,6 +83,9 @@
 
             // Generate a timestamp based on the user's locale
             let timestamp = new Date().toLocaleString();
+            
+            // Generate file timestamp YYYY-MM-DD
+            let fileTimestamp = new Date().toISOString().split('T')[0];
 
             // Replace the placeholders in the template with the generated HTML
             template = template.replace('{ENABLED}', enabled.trim())
@@ -92,8 +95,8 @@
                 .replace('{EXTENSION_ID}', extensionId)
                 .replace('{TIMESTAMP}', timestamp); // Replacing the timestamp placeholder
 
-            // Download the generated HTML file
-            download(template, 'extensions.html');
+            // Download the generated HTML file with the date
+            download(template, `Extensions ${fileTimestamp}.html`);
         });
     });
 
