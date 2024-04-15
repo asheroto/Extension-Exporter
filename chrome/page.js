@@ -56,15 +56,16 @@
             var comment = '';
 
             var url = baseUrl + extension.id;
+            var nameAndVersion = `${htmlEscape(extension.name)} ${extension.version}`;
 
             html += '            ';
             html += '<li>';
             html += '<a href="' + url + '" target="_blank" ';
             html += 'title="' + htmlEscape(extension.description) + '">';
-            html += htmlEscape(extension.name) + '</a>';
+            html += nameAndVersion + '</a>';
             html += '</li>\n';
 
-            comment += extension.name + '\n';
+            comment += nameAndVersion + '\n';
             comment += url + '\n\n';
 
             if (extension.enabled) {
@@ -83,7 +84,7 @@
 
             // Generate a timestamp based on the user's locale
             let timestamp = new Date().toLocaleString();
-            
+
             // Generate file timestamp YYYY-MM-DD
             let fileTimestamp = new Date().toISOString().split('T')[0];
 
