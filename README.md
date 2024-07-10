@@ -51,3 +51,11 @@ If you found this extension helpful and want to show your appreciation, consider
 If you enjoyed using this extension, please take a moment to [rate it on the Chrome Web Store](https://chrome.google.com/webstore/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb).
 
 For feature requests and bug reports, visit the [Issues](https://github.com/asheroto/Extension-Exporter/issues) tab.
+
+## To-Do List
+
+-   [x] Add CRX downloads
+-   [x] Improve text only listing
+-   [x] Add copy to clipboard button
+-   [x] Improve page that opens when clicking on the icon
+-   [ ] Work with [Edge Add-ons](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home)
