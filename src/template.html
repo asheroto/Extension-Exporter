@@ -42,26 +42,22 @@
             padding-bottom: 8px;
         }
 
-        h2.disabled {
-            margin-top: 40px;
-        }
-
-        h2.enabled,
-        ol.enabled a {
+        .extensions .enabled h2,
+        .extensions .enabled a {
             color: #388E3C;
         }
 
-        h2.disabled,
-        ol.disabled a {
+        .extensions .disabled h2,
+        .extensions .disabled a {
             color: #D32F2F;
         }
 
-        ol {
+        .extensions ol {
             margin: 0;
             padding: 0;
         }
 
-        li {
+        .extensions li {
             margin: 0 0 2px 30px;
             font-size: 16px;
             list-style-type: square;
@@ -75,6 +71,14 @@
         a:hover {
             text-decoration: underline;
             color: #212121;
+        }
+
+        .extensions .enabled {
+            margin-top: 15px;
+        }
+
+        .extensions .disabled {
+            margin-top: 15px;
         }
 
         .crxdownload-icon {
@@ -114,16 +118,6 @@
 
         .show-stats-icons .stats-icon {
             display: inline-block;
-        }
-
-        #textListing {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .divider {
-            border-top: 1px solid #ccc;
-            margin: 20px 0;
         }
 
         .button-group {
@@ -238,17 +232,20 @@
         </button>
     </div>
 
-    <h2 class="enabled">Enabled Extensions</h2>
-    <ol class="enabled">{ENABLED_EXTENSIONS}</ol>
+    <div class="extensions">
+        <div class="enabled">
+            <h2>Enabled Extensions</h2>
+            <ol>
+                {ENABLED_EXTENSIONS}
+            </ol>
+        </div>
 
-    <h2 class="disabled">Disabled Extensions</h2>
-    <ol class="disabled">{DISABLED_EXTENSIONS}</ol>
-
-    <div class="divider"></div>
-
-    <div id="textListing">
-        <button id="copyToClipboard">Copy to Clipboard</button>
-        <textarea readonly>{TEXT_LISTING}</textarea>
+        <div class="disabled">
+            <h2>Disabled Extensions</h2>
+            <ol>
+                {DISABLED_EXTENSIONS}
+            </ol>
+        </div>
     </div>
 
     <!-- Hidden JSON object for use by script -->
