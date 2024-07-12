@@ -20,7 +20,7 @@ Extension Exporter is a Chrome extension designed to export the names and URLs o
 - **Cross-browser compatibility**: Currently functions on both Chrome and Edge browsers.
 - **Separate Enabled and Disabled Extensions**: Clearly distinguish between enabled and disabled extensions.
 - **CRX Download Links**: Includes download links (CRX) for each extension.
-- **Text-only Listing**: Provides a text-based listing with a copy-to-clipboard function.
+- **Text-only Listing**: Offers a text-based listing with both copy-to-clipboard functionality and a print option.
 - **Toggle CRX Download**: Easily toggle visibility of CRX download icons.
 - **Toggle Stats**: View extension stats using [Chrome-Stats.com](https://chrome-stats.com/) or [Edge-Stats.com](https://edge-stats.com/). These sites provide statistics on the usage, popularity, and ratings of Chrome and Edge extensions, aiding users in assessing their reliability and performance.
 - **Toggle CRXcavator Report**: Access [CRXcavator](https://crxcavator.io/) reports for extensions, providing detailed security assessments, including information on the remote servers to which the extension connects, to evaluate the security risks associated with browser extensions.
@@ -58,10 +58,12 @@ For feature requests and bug reports, visit the [Issues](https://github.com/ashe
 ## To-Do List
 
 - [x] Add CRX downloads
-- [x] Improve text only listing
+- [x] Improve text-only listing
+    - [x] Add print button
 - [x] Add copy to clipboard button
 - [x] Improve page that opens when clicking on the icon
 - [x] Work with [Edge Add-ons](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home)
 - [ ] Switch to a table format?
     -   [ ] Include extension ID w/copy button
+    -   [ ] Include extension description
 - [ ] Automatically check extension risk status using API?

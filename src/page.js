@@ -203,19 +203,19 @@ const UrlType = Object.freeze({
     // ========================================================================== //
     const initialize = function () {
         browserAPI.management.getAll().then(async function (extensions) {
-            let enabled = '';
-            let disabled = '';
-
-            let commentEnabled = '';
-            let commentDisabled = '';
+            let enabledExtensions = '';
+            let disabledExtensions = '';
 
             extensions.sort(function (a, b) {
                 return a.name.localeCompare(b.name);
             });
 
+            let textListing = ''; // Initialize an empty string for the initial text-only listing
+            let textOnlyExtensionsJson = []; // Initialize an empty array for JSON objects
+            let textOnlyExtensionsJsonString = ''; // Initialize an empty string for JSON string
+
             for (const extension of extensions) {
                 let html = '';
-                let comment = '';
 
                 const urls = await getStoreUrls(extension.id);
 
@@ -231,6 +231,7 @@ const UrlType = Object.freeze({
                     urls.storeUrl = extension.homepageUrl;
                 }
 
+                // HTML for the extension listing
                 html += `
                     <li>
                         ${urls.storeUrl ? `<a href="${urls.storeUrl}" target="_blank" title="${descriptionEscaped}">${nameAndVersion}</a>` : nameAndVersion}
@@ -245,19 +246,41 @@ const UrlType = Object.freeze({
                         </a>
                     </li>\n`;
 
-                comment += `${nameAndVersion}\n${urls.storeUrl}\n\n`;
-
+                // HTML listing
                 if (extension.enabled) {
-                    enabled += html;
-                    commentEnabled += comment;
+                    enabledExtensions += html;
                 } else {
-                    disabled += html;
-                    commentDisabled += comment;
+                    disabledExtensions += html;
                 }
+
+                // JSON for text-only listing
+                textOnlyExtensionsJson.push({
+                    name: extension.name,
+                    version: extension.version,
+                    storeUrl: urls.storeUrl,
+                    crxLink: urls.crxLink,
+                    statsLink: urls.statsLink,
+                    crxcavatorLink: urls.crxcavatorLink
+                });
+
+                // Accumulate textListing
+                textListing += `${extension.name} ${extension.version}\n`;
+                textListing += `Store URL: ${urls.storeUrl}\n`;
+                textListing += `CRX Link: ${urls.crxLink}\n`;
+                textListing += `Stats Link: ${urls.statsLink}\n`;
+                textListing += `CRXcavator Link: ${urls.crxcavatorLink}\n\n`;
             }
 
             // Retrieve version from the manifest
             const exporterVersion = browserAPI.runtime.getManifest().version;
+
+            // Generate the text-only listing
+            textOnlyExtensionsJsonString = JSON.stringify(textOnlyExtensionsJson)
+                .replace(/</g, '\\u003c')
+                .replace(/>/g, '\\u003e')
+                .replace(/&/g, '\\u0026')
+                .replace(/"/g, '&quot;');
+            console.log(textOnlyExtensionsJsonString);
 
             loadTemplate(function (template) {
                 // Retrieve the extension ID to populate the 'generator' meta tag in the HTML output
@@ -270,17 +293,18 @@ const UrlType = Object.freeze({
                 let generatorUrl = urls.storeDetailUrl[currentBrowser].replace('{EXTENSION_ID}', extensionId);
 
                 // Replace the placeholders in the template with the generated HTML
-                template = template.replace('{ENABLED}', enabled.trim())
-                    .replaceAll('{TIMESTAMP}', getTimestamp())
-                    .replaceAll('{EXTENSION_ID}', extensionId)
-                    .replaceAll('{GENERATOR_URL}', generatorUrl)
-                    .replaceAll('{DISABLED}', disabled.trim())
-                    .replaceAll('{COMMENT_ENABLED}', commentEnabled.trim())
-                    .replaceAll('{COMMENT_DISABLED}', commentDisabled.trim())
+                template = template
                     .replaceAll('{EXPORTER_VERSION}', exporterVersion)
+                    .replaceAll('{GENERATOR_URL}', generatorUrl)
+                    .replaceAll('{TIMESTAMP}', getTimestamp())
+                    .replaceAll('{ENABLED_EXTENSIONS}', enabledExtensions.trim())
+                    .replaceAll('{DISABLED_EXTENSIONS}', disabledExtensions.trim())
+                    .replaceAll('{TEXT_LISTING}', textListing.trim())
+                    .replaceAll('{TEXT_LISTING_JSON}', textOnlyExtensionsJsonString)
                     .replaceAll('{CRX_DOWNLOAD_ICON}', icons.crxDownloadIcon)
                     .replaceAll('{STATS_ICON}', icons.statsIcon)
-                    .replaceAll('{CRXCAVATOR_ICON}', icons.crxcavatorIcon);
+                    .replaceAll('{CRXCAVATOR_ICON}', icons.crxcavatorIcon)
+                    .replaceAll('{PRINT_ICON}', icons.printIcon);
 
                 // Download the generated HTML file with the date
                 download(template, `${strings.filePrefix} ${getFileTimestamp()}.html`);

@@ -69,13 +69,11 @@
         a {
             text-decoration: none;
             color: #424242;
-            /* Slightly darker for readability */
         }
 
         a:hover {
             text-decoration: underline;
             color: #212121;
-            /* Slightly darker on hover */
         }
 
         .crxdownload-icon {
@@ -85,7 +83,6 @@
             background-image: url("{CRX_DOWNLOAD_ICON}");
             background-size: contain;
             display: none;
-            /* Hide initially */
         }
 
         .stats-icon {
@@ -95,7 +92,6 @@
             background-image: url("{STATS_ICON}");
             background-size: contain;
             display: none;
-            /* Hide initially */
         }
 
         .crxcavator-icon {
@@ -105,12 +101,10 @@
             background-image: url("{CRXCAVATOR_ICON}");
             background-size: contain;
             display: none;
-            /* Hide initially */
         }
 
         .show-crxcavator-icons .crxcavator-icon {
             display: inline-block;
-            /* Show when toggled */
         }
 
         .show-crxdownload-icons .crxdownload-icon {
@@ -132,24 +126,35 @@
         }
 
         .button-group {
-            margin-top: 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
 
         .button-group-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-right: 10px;
         }
 
         button {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0;
+            border-radius: 0;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+        }
+
+        button:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+
+        button:last-child {
+            border-radius: 0 5px 5px 0;
         }
 
         button:hover {
@@ -158,6 +163,11 @@
 
         button:active {
             background-color: #003d80;
+        }
+
+        #copyToClipboard {
+            border-radius: 5px;
+            /* Explicitly round the corners */
         }
 
         textarea {
@@ -175,79 +185,185 @@
         .center-text {
             text-align: center;
         }
+
+        @media print {
+            .button-group {
+                display: none;
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="show-crxdownload-icons show-stats-icons show-crxcavator-icons">
     <h1 class="title">Extension Export</h1>
     <h3 class="subtitle">{TIMESTAMP}</h3>
 
-    <h2 class="enabled">Enabled Extensions</h2>
-    <ol class="enabled">
-        {ENABLED}
-    </ol>
-
-    <h2 class="disabled">Disabled Extensions</h2>
-    <ol class="disabled">
-        {DISABLED}
-    </ol>
-
-    <div class="divider"></div>
-
     <div class="button-group">
-        <div class="button-group-title">Toggle</div>
-        <button id="showTextOnly">Text Only Listing</button>
+        <div class="button-group-title">Options</div>
+        <button id="showTextOnly">Text-Only Listing</button>
         <button id="toggleCrxIcons">CRX Download</button>
         <button id="toggleStats">Stats</button>
         <button id="toggleCRXcavator">CRXcavator Report</button>
     </div>
 
+    <h2 class="enabled">Enabled Extensions</h2>
+    <ol class="enabled">{ENABLED_EXTENSIONS}</ol>
+
+    <h2 class="disabled">Disabled Extensions</h2>
+    <ol class="disabled">{DISABLED_EXTENSIONS}</ol>
+
+    <div class="divider"></div>
+
     <div id="textListing">
         <button id="copyToClipboard">Copy to Clipboard</button>
-        <textarea readonly>
-----------------------------------------------------------
-Enabled Extensions
-----------------------------------------------------------
-
-{COMMENT_ENABLED}
-
-----------------------------------------------------------
-Disabled Extensions
-----------------------------------------------------------
-
-{COMMENT_DISABLED}
-        </textarea>
+        <textarea readonly>{TEXT_LISTING}</textarea>
     </div>
 
+    <!-- Hidden JSON object for use by script -->
+    <div id="textOnlyListingJson" data-json="{TEXT_LISTING_JSON}" style="display:none;"></div>
+
     <script>
-        document.getElementById('toggleCrxIcons').addEventListener('click', function () {
-            document.body.classList.toggle('show-crxdownload-icons');
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const textOnlyListingJson = JSON.parse(document.getElementById('textOnlyListingJson').getAttribute('data-json'));
 
-        document.getElementById('toggleStats').addEventListener('click', function () {
-            document.body.classList.toggle('show-stats-icons');
-        });
+            const generateTextListing = () => {
+                let textListing = '';
+                textOnlyListingJson.forEach(extension => {
+                    textListing += `<p>${extension.name} ${extension.version}<br>`;
+                    textListing += `Store URL: ${extension.storeUrl}<br>`;
+                    if (document.body.classList.contains('show-crxdownload-icons')) {
+                        textListing += `CRX Link: ${extension.crxLink}<br>`;
+                    }
+                    if (document.body.classList.contains('show-stats-icons')) {
+                        textListing += `Stats Link: ${extension.statsLink}<br>`;
+                    }
+                    if (document.body.classList.contains('show-crxcavator-icons')) {
+                        textListing += `CRXcavator Link: ${extension.crxcavatorLink}<br>`;
+                    }
+                    textListing += `</p>`;
+                });
+                return textListing.trim();
+            };
 
-        document.getElementById('toggleCRXcavator').addEventListener('click', function () {
-            document.body.classList.toggle('show-crxcavator-icons');
-        });
+            // Toggle CRX icons
+            document.getElementById('toggleCrxIcons').addEventListener('click', function () {
+                document.body.classList.toggle('show-crxdownload-icons');
+            });
 
-        document.getElementById('showTextOnly').addEventListener('click', function () {
-            var textListing = document.getElementById('textListing');
-            if (textListing.style.display === 'none' || textListing.style.display === '') {
-                textListing.style.display = 'block';
-                textListing.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                textListing.style.display = 'none';
-            }
-        });
+            // Toggle Stats icons
+            document.getElementById('toggleStats').addEventListener('click', function () {
+                document.body.classList.toggle('show-stats-icons');
+            });
 
-        document.getElementById('copyToClipboard').addEventListener('click', function () {
-            var textarea = document.querySelector('#textListing textarea');
-            textarea.select();
-            document.execCommand('copy');
+            // Toggle CRXcavator icons
+            document.getElementById('toggleCRXcavator').addEventListener('click', function () {
+                document.body.classList.toggle('show-crxcavator-icons');
+            });
+
+            document.getElementById('showTextOnly').addEventListener('click', function () {
+                const textOnlyListingJson = JSON.parse(document.getElementById('textOnlyListingJson').getAttribute('data-json'));
+
+                let width = (screen.width * .8);
+                let height = (screen.height * .6);
+                let left = (screen.width - width) / 2;
+                let top = (screen.height - height) / 2;
+                let popupWindow = window.open('', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+
+                let popupContent = `
+                    <html>
+                    <head>
+                        <title>Extension Export {TIMESTAMP}</title>
+                        <style>
+                            body {
+                                font-family: 'Roboto', sans-serif;
+                                line-height: 1.6;
+                                padding: 30px;
+                                text-align: left;
+                            }
+                            h1 {
+                                font-size: 40px;
+                                font-weight: 600;
+                                margin: 0 0 20px 0;
+                            }
+                            h3 {
+                                font-size: 18px;
+                                color: gray;
+                                margin: 0 0 20px 0;
+                                font-weight: 300;
+                            }
+                            .print-icon {
+                                cursor: pointer;
+                                margin-bottom: 20px;
+                                display: flex;
+                                align-items: center;
+                                color: #007bff;
+                            }
+                            .print-icon img {
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 8px;
+                            }
+                            .print-icon span {
+                                color: #007bff;
+                                font-size: 16px;
+                            }
+                            @media print {
+                                .print-icon {
+                                    display: none;
+                                }
+                            }
+                            .extension-title {
+                                font-weight: bold;
+                                font-size: 18px;
+                                margin-bottom: 5px;
+                            }
+                            .extension-detail {
+                                font-size: 14px;
+                                margin-bottom: 15px;
+                            }
+                            .extension-detail strong {
+                                display: block;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Extension Export</h1>
+                        <h3>{TIMESTAMP}</h3>
+                        <div class="print-icon" onclick="window.print();">
+                            <img src="{PRINT_ICON}" alt="Print">
+                            <span>Print</span>
+                        </div>`;
+
+                textOnlyListingJson.forEach(extension => {
+                    popupContent += `
+                        <div class="extension-detail">
+                            <div class="extension-title">${extension.name} ${extension.version}</div>
+                            <strong>Store URL:</strong> ${extension.storeUrl}`;
+                    if (document.body.classList.contains('show-crxdownload-icons')) {
+                        popupContent += `<strong>CRX Link:</strong> ${extension.crxLink}`;
+                    }
+                    if (document.body.classList.contains('show-stats-icons')) {
+                        popupContent += `<strong>Stats Link:</strong> ${extension.statsLink}`;
+                    }
+                    if (document.body.classList.contains('show-crxcavator-icons')) {
+                        popupContent += `<strong>CRXcavator Link:</strong> ${extension.crxcavatorLink}`;
+                    }
+                    popupContent += `</div>`;
+                });
+
+                popupContent += `
+                    </body>
+                    </html>`;
+
+                popupWindow.document.write(popupContent);
+                popupWindow.document.close();
+            });
+
+
+
         });
     </script>
+
 </body>
 
 </html>
