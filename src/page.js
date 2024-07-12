@@ -8,7 +8,8 @@ const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 // ========================================================================== //
 // Define a debug flag
 // ========================================================================== //
-const DEBUG = true;
+const DEBUG = false;
+const DEBUG_SHOW_ALL_EXTENSIONS = false;
 
 // ========================================================================== //
 // Define URL types using an enum
@@ -58,7 +59,7 @@ const UrlType = Object.freeze({
     // ========================================================================== //
     // Log all extensions if debug is enabled
     // ========================================================================== //
-    if (DEBUG) {
+    if (DEBUG_SHOW_ALL_EXTENSIONS) {
         browserAPI.management.getAll().then((extensions) => {
             console.log('All extensions:', extensions);
         });
@@ -71,18 +72,13 @@ const UrlType = Object.freeze({
         return browserAPI.management.get(extensionId).then((extension) => {
             const updateUrl = extension.updateUrl || '';
 
-            // Log the update URL for debugging purposes
-            if (DEBUG) {
-                console.log(`Update URL: ${updateUrl}`);
-            }
-
             if (updateUrl.includes("google.com")) {
                 return strings.browserName.Chrome;
             } else if (updateUrl.includes("microsoft.com")) {
                 return strings.browserName.Edge;
             } else {
                 // Log a warning if the platform is unknown
-                console.log(`Unknown platform for extension ${extensionId}`);
+                console.log(`Unknown platform for extension ${extensionId}. This means it's not hosted on the Chrome Web Store or Microsoft Edge Add-ons.`);
                 return '';
             }
         });
@@ -139,15 +135,6 @@ const UrlType = Object.freeze({
             getCrxLink(extensionId),
             getCrxcavatorLink(extensionId)
         ]).then((urls) => {
-            if (DEBUG) {
-                console.log(`Store URLs for extension ${extensionId}:`, {
-                    storeUrl: urls[0],
-                    statsLink: urls[1],
-                    crxLink: urls[2],
-                    crxcavatorLink: urls[3]
-                });
-            }
-
             return {
                 storeUrl: urls[0],
                 crxLink: urls[2],
@@ -184,9 +171,6 @@ const UrlType = Object.freeze({
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 callback(xhr.responseText);
-                if (DEBUG) {
-                    console.log('Template loaded');
-                }
             }
         };
         xhr.send();
@@ -206,7 +190,6 @@ const UrlType = Object.freeze({
         let seconds = String(now.getSeconds()).padStart(2, '0');
 
         let formattedTimestamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        if (DEBUG) { console.log('File timestamp:', formattedTimestamp); }
         return formattedTimestamp;
     };
 
