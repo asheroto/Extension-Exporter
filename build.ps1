@@ -1,3 +1,7 @@
+# Define vars
+$googleUpdateUrl = "https://clients2.google.com/service/update2/crx"
+$edgeUpdateUrl = "https://edge.microsoft.com/extensionwebstorebase/v1/crx"
+
 # Define the source folder path and output zip file names
 $srcFolderPath = "src"
 $manifestPath = Join-Path $srcFolderPath "manifest.json"
@@ -14,13 +18,29 @@ function Ensure-Folder {
     )
 
     if (-not (Test-Path $folderPath)) {
-        New-Item -ItemType Directory -Path $folderPath
+        New-Item -ItemType Directory -Path $folderPath | Out-Null
+        Write-Output "Folder created: $folderPath"
     } else {
         Remove-Item -Path (Join-Path $folderPath '*') -Recurse -Force
+        Write-Output "Folder cleared: $folderPath"
     }
 }
 
+# Function to create a zip file
+function Create-ZipFile {
+    param (
+        [string]$sourceFolder,
+        [string]$zipFileName
+    )
+
+    # Create the zip file
+    Compress-Archive -Path $sourceFolder -DestinationPath $zipFileName -Force
+
+    Write-Output "Zip file created: $zipFileName"
+}
+
 # Ensure dist folder and its subfolders exist and are empty
+Write-Output "Creating necessary folders and clearing existing content..."
 Ensure-Folder -folderPath $destFolderPath
 Ensure-Folder -folderPath $chromeFolder
 Ensure-Folder -folderPath $edgeFolder
@@ -46,18 +66,19 @@ function Update-ManifestAndZip {
     Copy-Item -Path (Join-Path $srcFolderPath '*') -Destination $destFolder -Recurse -Force
 
     # Create the zip file
-    if (Test-Path $zipFileName) {
-        Remove-Item $zipFileName
-    }
-    Compress-Archive -Path (Join-Path $destFolder '*') -DestinationPath $zipFileName
+    Create-ZipFile -sourceFolder $destFolder -zipFileName $zipFileName
 }
 
 # Update for Chrome
-Update-ManifestAndZip -updateUrl "https://clients2.google.com/service/update2/crx" -zipFileName $chromeZip -destFolder $chromeFolder
+Update-ManifestAndZip -updateUrl $googleUpdateUrl -zipFileName $chromeZip -destFolder $chromeFolder
 
 # Update for Edge
-Update-ManifestAndZip -updateUrl "https://edge.microsoft.com/extensionwebstorebase/v1/crx" -zipFileName $edgeZip -destFolder $edgeFolder
+Update-ManifestAndZip -updateUrl $edgeUpdateUrl -zipFileName $edgeZip -destFolder $edgeFolder
 
 # Restore the original manifest
-$manifest.update_url = "https://clients2.google.com/service/update2/crx"
+$manifest.update_url = $googleUpdateUrl
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -Path $manifestPath
+
+Write-Output "Manifest restored to original update URL."
+Write-Output ""
+Write-Output "Test extension by reloading extension in browser."
