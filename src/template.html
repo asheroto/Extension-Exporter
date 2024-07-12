@@ -165,6 +165,21 @@
             background-color: #003d80;
         }
 
+        .button-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        button.rounded-left {
+            border-radius: 5px 0 0 5px;
+        }
+
+        button.rounded-right {
+            border-radius: 0 5px 5px 0;
+        }
+
         #copyToClipboard {
             border-radius: 5px;
             /* Explicitly round the corners */
@@ -186,6 +201,10 @@
             text-align: center;
         }
 
+        .toggle-title {
+            margin-left: 10px;
+        }
+
         @media print {
             .button-group {
                 display: none;
@@ -200,10 +219,22 @@
 
     <div class="button-group">
         <div class="button-group-title">Options</div>
-        <button id="showTextOnly">Text-Only Listing</button>
-        <button id="toggleCrxIcons">CRX Download</button>
-        <button id="toggleStats">Stats</button>
-        <button id="toggleCRXcavator">CRXcavator Report</button>
+        <button id="showTextOnly" class="rounded-left">
+            <img src="{TEXT_ONLY_ICON}" class="button-icon"> Text-Only Listing
+        </button>
+        <button id="showHelp" class="rounded-right">
+            <img src="{HELP_ICON}" class="button-icon"> Help
+        </button>
+        <div class="button-group-title toggle-title">Toggle</div>
+        <button id="toggleCrxIcons" class="rounded-left">
+            <img src="{CRX_DOWNLOAD_ICON}" class="button-icon"> CRX Download
+        </button>
+        <button id="toggleStats">
+            <img src="{STATS_ICON}" class="button-icon"> Stats
+        </button>
+        <button id="toggleCRXcavator" class="rounded-right">
+            <img src="{CRXCAVATOR_ICON}" class="button-icon"> CRXcavator Report
+        </button>
     </div>
 
     <h2 class="enabled">Enabled Extensions</h2>
@@ -260,14 +291,21 @@
                 document.body.classList.toggle('show-crxcavator-icons');
             });
 
+            // Calculate popup dimensions
+            function calculatePopupDimensions(widthPercent, heightPercent) {
+                let width = screen.width * (widthPercent / 100);
+                let height = screen.height * (heightPercent / 100);
+                let left = (screen.width - width) / 2;
+                let top = (screen.height - height) / 2;
+                return { width, height, left, top };
+            }
+
+            // Text-Only Listing
             document.getElementById('showTextOnly').addEventListener('click', function () {
                 const textOnlyListingJson = JSON.parse(document.getElementById('textOnlyListingJson').getAttribute('data-json'));
 
-                let width = (screen.width * .8);
-                let height = (screen.height * .6);
-                let left = (screen.width - width) / 2;
-                let top = (screen.height - height) / 2;
-                let popupWindow = window.open('', '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+                let dimensions = calculatePopupDimensions(80, 60);
+                let popupWindow = window.open('', '_blank', `width=${dimensions.width},height=${dimensions.height},left=${dimensions.left},top=${dimensions.top}`);
 
                 let popupContent = `
                     <html>
@@ -359,7 +397,54 @@
                 popupWindow.document.close();
             });
 
+            // Help
+            document.getElementById('showHelp').addEventListener('click', function () {
+                let dimensions = calculatePopupDimensions(60, 60);
+                let helpPopup = window.open('', '_blank', `width=${dimensions.width},height=${dimensions.height},left=${dimensions.left},top=${dimensions.top}`);
+                let helpContent = `
+                    <html>
+                    <head>
+                        <title>Help</title>
+                        <style>
+                            body {
+                                font-family: 'Roboto', sans-serif;
+                                line-height: 1.6;
+                                padding: 20px;
+                            }
+                            h1 {
+                                font-size: 24px;
+                                font-weight: bold;
+                                margin-bottom: 10px;
+                            }
+                            p {
+                                margin-bottom: 10px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Help</h1>
+                        <h2>Options</h2>
+                        <p><strong>Text-Only Listing:</strong> Displays a plain text listing of all extensions. This includes a copy-to-clipboard function and the option to print the listing.</p>
+                        <p><strong>Help:</strong> Provides information on the functionality of each button and option available in the extension exporter tool.</p>
 
+                        <h2>Toggle</h2>
+                        <p><strong>CRX Download:</strong> Provides a direct link to download the extension's CRX file, which can be used for offline installation or backup purposes.</p>
+                        <p><strong>Stats:</strong> Offers a link to the extension's statistics page on the Chrome Web Store or Edge Add-ons site, where you can view user ratings, reviews, and other performance metrics. For more details, visit 
+                            <a href="https://chrome-stats.com" target="_blank">Chrome-Stats.com</a> and 
+                            <a href="https://edge-stats.com" target="_blank">Edge-Stats.com</a>. These sites provide comprehensive analytics and insights on extension performance, including download counts, active users, and more.</p>
+                        <p><strong>CRXcavator Report:</strong> Links to the CRXcavator security analysis report, providing detailed insights into the security and privacy aspects of the extension. CRXcavator performs automated analysis of Chrome extensions to assess their risk and provide recommendations. Learn more at 
+                            <a href="https://crxcavator.io" target="_blank">CRXcavator.io</a>.</p>
+
+                        <h2>Disclaimer</h2>
+                        <p style="font-size: 12px;">
+                            The author of Extension Exporter is not affiliated with Chrome-Stats.com, Edge-Stats.com, or CRXcavator.com. The author makes no guarantee regarding their effectiveness or accuracy. All information provided by these tools is based on data available from the respective platforms and automated analysis tools. Always review extension permissions and ratings before installation. All rights reserved.
+                        </p>
+                    </body>
+                    </html>
+                `;
+                helpPopup.document.write(helpContent);
+                helpPopup.document.close();
+            });
 
         });
     </script>

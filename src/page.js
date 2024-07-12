@@ -301,9 +301,11 @@ const UrlType = Object.freeze({
                     .replaceAll('{DISABLED_EXTENSIONS}', disabledExtensions.trim())
                     .replaceAll('{TEXT_LISTING}', textListing.trim())
                     .replaceAll('{TEXT_LISTING_JSON}', textOnlyExtensionsJsonString)
+                    .replaceAll('{TEXT_ONLY_ICON}', icons.textOnlyIcon)
                     .replaceAll('{CRX_DOWNLOAD_ICON}', icons.crxDownloadIcon)
                     .replaceAll('{STATS_ICON}', icons.statsIcon)
                     .replaceAll('{CRXCAVATOR_ICON}', icons.crxcavatorIcon)
+                    .replaceAll('{HELP_ICON}', icons.helpIcon)
                     .replaceAll('{PRINT_ICON}', icons.printIcon);
 
                 // Download the generated HTML file with the date
