@@ -12,6 +12,10 @@ https://github.com/asheroto/Extension-Exporter/assets/49938263/c348aceb-dfaa-4e3
 
 Extension Exporter is a Chrome extension designed to export the names and URLs of all your installed extensions into an HTML file. This extension is fully open-source to ensure transparency and safety.
 
+## Stores
+
+Available on both the [Chrome Web Store](https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb) and [Microsoft Edge-Addons](https://microsoftedge.microsoft.com/addons/detail/extension-exporter/oejmelcbffojcocoodfdkkmmidolpeoo).
+
 ## Features
 
 - **Export Installed Extensions**: Organize installed extension names and homepage URLs into an offline HTML file (no dependencies).
