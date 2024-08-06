@@ -71,3 +71,4 @@ For feature requests and bug reports, visit the [Issues](https://github.com/ashe
     -   [ ] Include extension ID w/copy button
     -   [ ] Include extension description
 - [ ] Automatically check extension risk status using API?
+- [ ] Separate Apps from Extensions (issue [#4](https://github.com/asheroto/Extension-Exporter/issues/4))
