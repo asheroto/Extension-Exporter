@@ -29,6 +29,13 @@ Available on both the [Chrome Web Store](https://chromewebstore.google.com/detai
 - **Toggle Stats**: View extension stats using [Chrome-Stats.com](https://chrome-stats.com/) or [Edge-Stats.com](https://edge-stats.com/). These sites provide statistics on the usage, popularity, and ratings of Chrome and Edge extensions, aiding users in assessing their reliability and performance.
 - **Toggle CRXcavator Report**: Access [CRXcavator](https://crxcavator.io/) reports for extensions, providing detailed security assessments, including information on the remote servers to which the extension connects, to evaluate the security risks associated with browser extensions.
 
+## Supported prefixes
+- HKCU / HKEY_CURRENT_USER
+- HKLM / HKEY_LOCAL_MACHINE
+- HKCR / HKEY_CLASSES_ROOT
+- HKU / HKEY_USERS
+- HKCC / HKEY_CURRENT_CONFIG
+
 ## Installation
 
 This extension is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb). This is the recommended installation approach. Alternatively, you can install the CRX file in releases.
