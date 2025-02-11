@@ -41,8 +41,8 @@ This extension is fully open-source to ensure both transparency and security. Yo
 
 Some features have been **removed** or will be removed soon due to Chrome security changes.  
 
-- **CRX Download Links (Removed)** – No longer functional due to browser restrictions. Use the CRX link from the text-only listing with `wget`, `curl`, or the [CRX Extractor/Downloader](https://chromewebstore.google.com/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda) extension.  
-- **Toggle CRX Download (To Be Removed Soon)** – Will be removed as CRX downloads no longer work from the exported HTML file.  
+- **CRX Download Links** – No longer functional due to browser restrictions. Use the CRX link from the text-only listing with `wget`, `curl`, or the [CRX Extractor/Downloader](https://chromewebstore.google.com/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda) extension.  
+- **Toggle CRX Download** – Will be removed as CRX downloads no longer work from the exported HTML file.  
 
 Chrome now blocks direct CRX downloads from external HTML files for security reasons. **Manually installed CRX files also won't update automatically**, so we recommend installing from the **Chrome Web Store** or **Edge Add-ons Store** for updates and security patches.
 
