@@ -235,9 +235,9 @@ const UrlType = Object.freeze({
                 html += `
                     <li>
                         ${urls.storeUrl ? `<a href="${urls.storeUrl}" target="_blank" title="${descriptionEscaped}">${nameAndVersion}</a>` : nameAndVersion}
-                        <a href="${urls.crxLink}" target="_blank" title="Download CRX file" alt="Download CRX file">
+                        <a href="#" onclick="explainCrxDownload(); return false;" title="Download CRX file" alt="Download CRX file">
                             <span class="crxdownload-icon"></span>
-                        </a> 
+                        </a>
                         <a href="${urls.statsLink}" target="_blank" title="Stats" alt="Stats">
                             <span class="stats-icon"></span>
                         </a> 

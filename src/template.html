@@ -444,6 +444,16 @@
                 helpPopup.document.close();
             });
         });
+
+        function explainCrxDownload() {
+            alert("Due to Chrome security changes, CRX files can't be downloaded directly from this HTML file because it is outside the Chrome extension context.\n\n" +
+                "To download:\n" +
+                "- Copy the CRX link from the text-only listing and download it manually using a command-line tool like wget or curl.\n" +
+                "OR\n" +
+                "- Use the CRX Extractor/Downloader extension from the Chrome Web Store.\n\n" +
+                "The CRX Extractor/Downloader works because it runs within Chrome's extension environment, which allows it to bypass the security restrictions that prevent downloads from this HTML file.\n\n" +
+                "Note: If you install a CRX file directly, it won't receive automatic updates when a new version is released. For this reason, we recommend installing extensions directly from the Chrome Web Store or Edge Add-ons site.");
+        }        
     </script>
 
 </body>

@@ -23,11 +23,24 @@ Available on both the [Chrome Web Store](https://chromewebstore.google.com/detai
 - **Easy-to-use**: Click the extension button to instantly generate the HTML file.
 - **Cross-browser compatibility**: Currently functions on both Chrome and Edge browsers.
 - **Separate Enabled and Disabled Extensions**: Clearly distinguish between enabled and disabled extensions.
-- **CRX Download Links**: Includes download links (CRX) for each extension.
+- (Removed - see below) **CRX Download Links**: Includes download links (CRX) for each extension.
 - **Text-only Listing**: Offers a text-based listing with both copy-to-clipboard functionality and a print option.
-- **Toggle CRX Download**: Easily toggle visibility of CRX download icons.
+- (Removed soon - see below) **Toggle CRX Download**: Easily toggle visibility of CRX download icons.
 - **Toggle Stats**: View extension stats using [Chrome-Stats.com](https://chrome-stats.com/) or [Edge-Stats.com](https://edge-stats.com/). These sites provide statistics on the usage, popularity, and ratings of Chrome and Edge extensions, aiding users in assessing their reliability and performance.
 - **Toggle CRXcavator Report**: Access [CRXcavator](https://crxcavator.io/) reports for extensions, providing detailed security assessments, including information on the remote servers to which the extension connects, to evaluate the security risks associated with browser extensions.
+
+## Feature Removal  
+
+Certain features have been **removed** or will be removed soon due to browser security changes and policy updates.  
+
+- **CRX Download Links (Removed)** – Direct CRX download links have been removed because Chrome no longer allows extensions to be downloaded from an external HTML file. However, you can still obtain the CRX file manually by copying the CRX link from the text-only listing and using a command-line tool like `wget` or `curl`, or by using the [CRX Extractor/Downloader](https://chromewebstore.google.com/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda) extension.  
+
+- **Toggle CRX Download (To Be Removed Soon)** – The ability to toggle CRX download icons will be removed in a future update since CRX downloads no longer function from the exported HTML file.  
+
+### Why Were These Features Removed?  
+Recent **Chrome security changes** prevent direct downloads of CRX files from an exported HTML file because it operates outside the Chrome extension context.
+
+Additionally, if you install a CRX file manually, **it will not update automatically** when a new version is released. For this reason, we recommend installing extensions directly from the **Chrome Web Store** or **Edge Add-ons Store** to ensure you receive updates and security patches.
 
 ## Installation
 
@@ -61,7 +74,6 @@ For feature requests and bug reports, visit the [Issues](https://github.com/ashe
 
 ## To-Do List
 
-- [x] Add CRX downloads
 - [x] Improve text-only listing
     - [x] Add print button
 - [x] Add copy to clipboard button
@@ -70,5 +82,4 @@ For feature requests and bug reports, visit the [Issues](https://github.com/ashe
 - [ ] Switch to a table format?
     -   [ ] Include extension ID w/copy button
     -   [ ] Include extension description
-- [ ] Automatically check extension risk status using API?
 - [ ] Separate Apps from Extensions (issue [#4](https://github.com/asheroto/Extension-Exporter/issues/4))

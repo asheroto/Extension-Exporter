@@ -79,6 +79,10 @@ Update-ManifestAndZip -updateUrl $edgeUpdateUrl -zipFileName $edgeZip -destFolde
 $manifest.update_url = $googleUpdateUrl
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -Path $manifestPath
 
+# Delete the destination folders
+Remove-Item -Path $chromeFolder -Recurse -Force
+Remove-Item -Path $edgeFolder -Recurse -Force
+
 Write-Output "Manifest restored to original update URL."
 Write-Output ""
 Write-Output "Test extension by reloading extension in browser."
