@@ -69,17 +69,3 @@ If you found this extension helpful and want to show your appreciation, consider
 If you enjoyed using this extension, please take a moment to [rate it on the Chrome Web Store](https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb).
 
 For feature requests and bug reports, visit the [Issues](https://github.com/asheroto/Extension-Exporter/issues) tab.
-
-## To-Do List
-
-- [x] Improve text-only listing
-    - [x] Add print button
-- [x] Add copy to clipboard button
-- [x] Improve page that opens when clicking on the icon
-- [x] Work with [Edge Add-ons](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home)
-- [x] Include extension ID w/copy button
-- [x] Include extension description
-- [x] Separate Apps from Extensions (issue [#4](https://github.com/asheroto/Extension-Exporter/issues/4))
-- [x] Export as JSON and CSV
-- [x] Replace CRXcavator with CRXaminer
-- [x] Switch to a table format
