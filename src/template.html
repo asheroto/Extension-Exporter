@@ -168,6 +168,7 @@
         .icon-text { --icon: url("{TEXT_ONLY_ICON}"); }
         .icon-download { --icon: url("{DOWNLOAD_ICON}"); }
         .icon-help { --icon: url("{HELP_ICON}"); }
+        .icon-ai { --icon: url("{AI_ICON}"); }
         .icon-stats { --icon: url("{STATS_ICON}"); }
         .icon-security { --icon: url("{SECURITY_ICON}"); }
 
@@ -389,6 +390,7 @@
                 <button id="showTextOnly" type="button"><span class="icon icon-text"></span>Text-only listing</button>
                 <button id="downloadJson" type="button"><span class="icon icon-download"></span>Download JSON</button>
                 <button id="downloadCsv" type="button"><span class="icon icon-download"></span>Download CSV</button>
+                <button id="copyAiPrompt" type="button" title="Copies a prompt listing every extension, ready to paste into ChatGPT, Claude, or another AI for a security review"><span class="icon icon-ai"></span>Copy AI prompt</button>
                 <button id="showHelp" type="button"><span class="icon icon-help"></span>Help</button>
             </div>
             <div class="toolbar-group">
@@ -514,7 +516,29 @@
                 popup.document.close();
             };
 
-            // Text-only listing: opened as a real plain text document, so there is no formatting and nothing to escape
+            // Open text in a popup as a real plain text document, so there is no formatting and nothing to escape
+            const openText = (text) => window.open(URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })), '_blank', popupFeatures());
+
+            // AI prompt: instructions plus a compact list an AI can look up by ID
+            document.getElementById('copyAiPrompt').addEventListener('click', function () {
+                const button = this;
+                const group = (title, items) => items.length ? `\n${title}:\n${items.map((e) => `- ${e.name} ${e.version} (ID: ${e.id}${e.store ? ', ' + e.store : ', not from a store'})`).join('\n')}\n` : '';
+                const isApp = (e) => e.type.endsWith('app');
+                const prompt = `I exported the list of extensions installed in {BROWSER_NAME} with Extension Exporter. Please review them for me.\n\n`
+                    + `For each one: say what it does and who publishes it, note any known security or privacy concerns (such as a change of ownership, abandonment, data collection, or past malware reports), and rate it low, medium, or high risk. Use the extension ID to look it up in its store when you can. Finish with a short summary and a list of any I should consider removing.\n`
+                    + group('Enabled extensions', listing.filter((e) => e.type === 'extension' && e.enabled))
+                    + group('Disabled extensions', listing.filter((e) => e.type === 'extension' && !e.enabled))
+                    + group('Apps', listing.filter(isApp))
+                    + group('Themes', listing.filter((e) => e.type === 'theme'));
+
+                navigator.clipboard.writeText(prompt).then(() => {
+                    const label = button.innerHTML;
+                    button.textContent = 'Copied, paste into ChatGPT or Claude';
+                    setTimeout(() => { button.innerHTML = label; }, 3000);
+                }).catch(() => openText(prompt));
+            });
+
+            // Text-only listing
             document.getElementById('showTextOnly').addEventListener('click', function () {
                 // One labeled line, skipped when there is no value
                 const line = (label, value) => value ? `\n${label}: ${value}` : '';
@@ -527,8 +551,7 @@
                     + (isShown('show-stats-icons') ? line('Stats link', extension.statsLink) : '')
                     + (isShown('show-security-icons') ? line('Security report', extension.securityLink) : '')).join('\n\n');
 
-                const text = `Installed extensions\nExported {TIMESTAMP}\n\n${entries}\n`;
-                window.open(URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })), '_blank', popupFeatures());
+                openText(`Installed extensions\nExported {TIMESTAMP}\n\n${entries}\n`);
             });
 
             // Help
@@ -546,6 +569,7 @@
                     <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, ready to copy, print, or save.</p>
                     <p><strong>Download JSON</strong> saves the full listing, including IDs, descriptions, and all links.</p>
                     <p><strong>Download CSV</strong> saves the same listing as a file that opens in Excel or any spreadsheet app.</p>
+                    <p><strong>Copy AI prompt</strong> copies a ready-made prompt to your clipboard. Paste it into ChatGPT, Claude, or another AI assistant and it will review each extension by name and ID, flag known security or privacy concerns, and suggest any worth removing. Only names, versions, IDs, and store names are included. If the clipboard is blocked, the prompt opens as text to copy by hand.</p>
 
                     <h2>Show</h2>
                     <p><strong>IDs</strong> shows the ID column. Click an ID to copy it, for example to use in a browser policy.</p>

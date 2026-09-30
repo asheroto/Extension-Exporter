@@ -40,7 +40,7 @@ const getSection = (item) => {
 // ========================================================================== //
 // Convert the listing to CSV (RFC 4180 quoting, with a BOM so Excel reads UTF-8)
 // ========================================================================== //
-const CSV_COLUMNS = { name: 'Name', version: 'Version', id: 'ID', type: 'Type', enabled: 'Enabled', description: 'Description', storeUrl: 'Store URL', crxLink: 'CRX Link', statsLink: 'Stats Link', securityLink: 'Security Report' };
+const CSV_COLUMNS = { name: 'Name', version: 'Version', id: 'ID', type: 'Type', enabled: 'Enabled', store: 'Store', description: 'Description', storeUrl: 'Store URL', crxLink: 'CRX Link', statsLink: 'Stats Link', securityLink: 'Security Report' };
 
 export const toCsv = (listing) => {
     const cell = (value) => {
@@ -73,6 +73,7 @@ export const buildExport = (extensions, template, meta) => {
             id: extension.id,
             type: extension.type,
             enabled: extension.enabled,
+            store: platform ? strings.storeLabel[platform] : '',
             description: extension.description,
             storeUrl: link('storeDetailUrl') || homepageUrl,
             crxLink: link('crxdownloadUrl'),
@@ -124,7 +125,9 @@ export const buildExport = (extensions, template, meta) => {
         DOWNLOAD_ICON: icons.downloadIcon,
         STATS_ICON: icons.statsIcon,
         SECURITY_ICON: icons.securityIcon,
-        HELP_ICON: icons.helpIcon
+        HELP_ICON: icons.helpIcon,
+        AI_ICON: icons.aiIcon,
+        BROWSER_NAME: esc(meta.browserName)
     };
 
     // Single pass, so placeholder-like text inside extension names is never substituted
@@ -167,6 +170,7 @@ if (globalThis.chrome?.management) {
 
         const html = buildExport(extensions, template, {
             exporterVersion: chrome.runtime.getManifest().version,
+            browserName: browser,
             // Chromium major version, for the CRX links (Edge reports Chrome/ in its user agent too)
             browserVersion: `${navigator.userAgent.match(/Chrome\/(\d+)/)?.[1] || 140}.0`,
             generatorUrl: storeUrl,

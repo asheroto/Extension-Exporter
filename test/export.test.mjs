@@ -15,7 +15,7 @@ const extensions = [
     { id: 'e'.repeat(32), name: 'Dark Theme', version: '4.0', type: 'theme', enabled: true, description: '', updateUrl: chromeUpdate }
 ];
 
-const html = buildExport(extensions, template, { exporterVersion: '9.9.9', browserVersion: '140.0', generatorUrl: 'https://example.com', timestamp: 'NOW', fileTimestamp: 'FILE', logo: 'data:image/png;base64,AAAA' });
+const html = buildExport(extensions, template, { exporterVersion: '9.9.9', browserName: 'Chrome', browserVersion: '140.0', generatorUrl: 'https://example.com', timestamp: 'NOW', fileTimestamp: 'FILE', logo: 'data:image/png;base64,AAAA' });
 const section = (name) => html.split(`<section class="${name}">`)[1].split('</section>')[0];
 
 // Hostile names and descriptions are escaped
@@ -57,6 +57,7 @@ const listing = JSON.parse(unescape(html.match(/data-json="([^"]*)"/)[1]));
 assert.equal(listing.length, 5);
 assert.equal(listing.find((x) => x.type === 'theme').name, 'Dark Theme');
 assert.equal(listing[0].name, extensions[0].name, 'JSON keeps original text');
+assert.deepEqual(listing.map((x) => x.store), ['Chrome Web Store', 'Chrome Web Store', 'Chrome Web Store', '', 'Edge Add-ons'], 'store label per item');
 
 // CSV: embedded copy matches, and it survives HTML parsing (no raw CR in the attribute)
 const csv = toCsv(listing);
@@ -67,6 +68,6 @@ assert.equal(csv.split('\r\n').length, 6, 'header plus one row per item');
 
 // CSV: quotes are doubled, and formula-looking cells are neutralized
 const row = toCsv([{ name: '=HYPERLINK("http://evil")', version: '-1', id: '@x', description: 'a "b", c\nd', enabled: false }]).split('\r\n')[1];
-assert.ok(row.startsWith(`"'=HYPERLINK(""http://evil"")","'-1","'@x","","false","a ""b"", c\nd"`), row);
+assert.ok(row.startsWith(`"'=HYPERLINK(""http://evil"")","'-1","'@x","","false","","a ""b"", c\nd"`), row);
 
 console.log('All export checks passed.');
