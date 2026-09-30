@@ -27,7 +27,7 @@ Available on both the [Chrome Web Store](https://chromewebstore.google.com/detai
 - **Separate Apps and Themes**: Apps and themes are listed in their own sections instead of mixed in with extensions. Only legacy Chrome Apps are visible to extensions. Web apps added with "Install app" are not, so the export points you to `chrome://apps` or `edge://apps` for those.
 - **Light and Dark Themes**: The export follows your system's light or dark setting, prints in light, and stays fully self-contained with no external fonts or files.
 - **Extension IDs**: Shows each extension's ID. Click an ID to copy it, which is handy for browser policies such as force-install lists.
-- **Text-only Listing**: Offers a text-based listing, including CRX links, with a print option.
+- **Text-only Listing**: Opens a plain text listing, including CRX links, ready to copy, print, or save.
 - **Download JSON or CSV**: Saves the full listing, including IDs, descriptions, and links, as a JSON file or as a CSV file that opens in Excel.
 - **Toggle Stats**: View extension stats using [Chrome-Stats.com](https://chrome-stats.com/) or [Edge-Stats.com](https://edge-stats.com/). These sites provide statistics on the usage, popularity, and ratings of Chrome and Edge extensions, aiding users in assessing their reliability and performance.
 - **Toggle Security Report**: Access [CRXaminer](https://crxaminer.tech/) reports for Chrome Web Store extensions, covering permissions, a risk rating, and the remote servers the extension contacts. This replaces CRXcavator, which Cisco shut down.

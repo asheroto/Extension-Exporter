@@ -170,7 +170,6 @@
         .icon-help { --icon: url("{HELP_ICON}"); }
         .icon-stats { --icon: url("{STATS_ICON}"); }
         .icon-security { --icon: url("{SECURITY_ICON}"); }
-        .icon-print { --icon: url("{PRINT_ICON}"); }
 
         /* Sections, each marked with a status bar */
         .extensions section {
@@ -466,8 +465,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const listing = JSON.parse(document.getElementById('listingJson').getAttribute('data-json'));
 
-            // Escape text before writing it into a popup document
-            const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
             const isShown = (className) => document.body.classList.contains(className);
 
             // Popups reuse this page's stylesheet so they match the theme
@@ -504,52 +501,34 @@
             document.getElementById('downloadJson').addEventListener('click', () => saveFile(JSON.stringify(listing, null, 2), 'json', 'application/json'));
             document.getElementById('downloadCsv').addEventListener('click', () => saveFile(document.getElementById('listingCsv').getAttribute('data-csv'), 'csv', 'text/csv'));
 
-            // Open a themed popup window
-            const openPopup = (title, extraStyle, body) => {
-                const width = screen.width * 0.7;
+            // Popup window size and position (70% of the screen unless a width is given)
+            const popupFeatures = (width = screen.width * 0.7) => {
                 const height = screen.height * 0.7;
-                const popup = window.open('', '_blank', `width=${width},height=${height},left=${(screen.width - width) / 2},top=${(screen.height - height) / 2}`);
+                return `width=${width},height=${height},left=${(screen.width - width) / 2},top=${(screen.height - height) / 2}`;
+            };
+
+            // Open a themed popup window
+            const openPopup = (title, extraStyle, body, width) => {
+                const popup = window.open('', '_blank', popupFeatures(width));
                 popup.document.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>${title}</title>${baseStyle}<style>${extraStyle}</style></head><body><main class="page">${body}</main></body></html>`);
                 popup.document.close();
             };
 
-            // Text-only listing
+            // Text-only listing: opened as a real plain text document, so there is no formatting and nothing to escape
             document.getElementById('showTextOnly').addEventListener('click', function () {
                 // One labeled line, skipped when there is no value
-                const line = (label, value) => value ? `<dt>${label}</dt><dd>${esc(value)}</dd>` : '';
+                const line = (label, value) => value ? `\n${label}: ${value}` : '';
 
-                const entries = listing.map((extension) => `
-                    <article class="entry">
-                        <h2>${esc(extension.name)} ${esc(extension.version)}${extension.enabled ? '' : ' (disabled)'}</h2>
-                        <dl>
-                            ${isShown('show-ids') ? line('ID', extension.id) : ''}
-                            ${line('Description', extension.description)}
-                            ${line('Store URL', extension.storeUrl)}
-                            ${line('CRX link', extension.crxLink)}
-                            ${isShown('show-stats-icons') ? line('Stats link', extension.statsLink) : ''}
-                            ${isShown('show-security-icons') ? line('Security report', extension.securityLink) : ''}
-                        </dl>
-                    </article>`).join('');
+                const entries = listing.map((extension) => `${extension.name} ${extension.version}${extension.enabled ? '' : ' (disabled)'}`
+                    + (isShown('show-ids') ? line('ID', extension.id) : '')
+                    + line('Description', extension.description)
+                    + line('Store URL', extension.storeUrl)
+                    + line('CRX link', extension.crxLink)
+                    + (isShown('show-stats-icons') ? line('Stats link', extension.statsLink) : '')
+                    + (isShown('show-security-icons') ? line('Security report', extension.securityLink) : '')).join('\n\n');
 
-                openPopup('Extension Export {TIMESTAMP}', `
-                    .page { max-width: 900px; }
-                    .masthead h1 { font-size: 36px; }
-                    .entry { padding: 14px 0; border-bottom: 1px solid var(--rule); break-inside: avoid; }
-                    .entry h2 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 18px; }
-                    .entry dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 16px; margin: 0; font-size: 14px; }
-                    .entry dt { color: var(--muted); }
-                    .entry dd { margin: 0; overflow-wrap: anywhere; }`, `
-                    <header class="masthead">
-                        <img src="{LOGO}" alt="Extension Exporter logo" class="logo">
-                        <div>
-                            <h1>Installed extensions</h1>
-                            <p class="meta">Exported {TIMESTAMP}</p>
-                        </div>
-                    </header>
-                    <div class="toolbar">
-                        <button type="button" onclick="window.print();"><span class="icon icon-print"></span>Print</button>
-                    </div>
-                    ${entries}`);
+                const text = `Installed extensions\nExported {TIMESTAMP}\n\n${entries}\n`;
+                window.open(URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })), '_blank', popupFeatures());
             });
 
             // Help
@@ -564,7 +543,7 @@
                     <p>Extensions are listed in tables by whether they are enabled. Apps and themes have their own sections. Click a name to open its store page.</p>
 
                     <h2>Buttons</h2>
-                    <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, with an option to print.</p>
+                    <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, ready to copy, print, or save.</p>
                     <p><strong>Download JSON</strong> saves the full listing, including IDs, descriptions, and all links.</p>
                     <p><strong>Download CSV</strong> saves the same listing as a file that opens in Excel or any spreadsheet app.</p>
 
@@ -580,7 +559,9 @@
                     <p>Browsers block CRX downloads started from a local HTML file, so CRX links are listed as text only. Download them with a tool like wget or curl. Extensions installed from a CRX file do not update automatically, so installing from the Chrome Web Store or Edge Add-ons is recommended.</p>
 
                     <h2>Disclaimer</h2>
-                    <p class="fine-print">The author of Extension Exporter is not affiliated with Chrome-Stats.com, Edge-Stats.com, or CRXaminer. The author makes no guarantee regarding their effectiveness or accuracy. All information provided by these tools is based on data available from the respective platforms and automated analysis tools. Always review extension permissions and ratings before installation.</p>`);
+                    <p class="fine-print">The author of Extension Exporter is not affiliated with Chrome-Stats.com, Edge-Stats.com, or CRXaminer. The author makes no guarantee regarding their effectiveness or accuracy. All information provided by these tools is based on data available from the respective platforms and automated analysis tools. Always review extension permissions and ratings before installation.</p>`,
+                    // Help is prose, so the window only needs to fit its 72-character lines
+                    Math.min(800, screen.availWidth));
             });
         });
     </script>

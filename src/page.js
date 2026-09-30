@@ -124,8 +124,7 @@ export const buildExport = (extensions, template, meta) => {
         DOWNLOAD_ICON: icons.downloadIcon,
         STATS_ICON: icons.statsIcon,
         SECURITY_ICON: icons.securityIcon,
-        HELP_ICON: icons.helpIcon,
-        PRINT_ICON: icons.printIcon
+        HELP_ICON: icons.helpIcon
     };
 
     // Single pass, so placeholder-like text inside extension names is never substituted
