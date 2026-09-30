@@ -7,455 +7,583 @@
 <head>
     <meta charset="UTF-8">
     <title>Extension Export {TIMESTAMP}</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <meta name="generator" content="{GENERATOR_URL}">
     <meta name="exporter-version" content="{EXPORTER_VERSION}">
-    <link rel="icon"
-        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAC4jAAAuIwF4pT92AAAKaWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNy4yLWMwMDAgMTE2LmRlZTNhNzcsIDIwMjIvMDkvMDEtMTM6NTc6MDggICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMy41IChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjMtMDEtMDNUMDI6NTk6NDEtMDY6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIzLTEwLTI0VDA0OjU0OjU4LTA1OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIzLTEwLTI0VDA0OjU0OjU4LTA1OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpiY2NjMTFmYS1jZTE3LTJjNDUtOTZhMi0yMTg4ZWI1OGYxOTEiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDpkODFmMDEwZS1mZjg3LTM3NDgtOTM2ZC03MDM3OTkzYzY0YTQiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowOTU0OTc1Yi03YmJhLTZjNGItYmZjNy1jYTVlZDFmY2FmNmMiIHRpZmY6T3JpZW50YXRpb249IjEiIHRpZmY6WFJlc29sdXRpb249IjMwMDAwMDAvMTAwMDAiIHRpZmY6WVJlc29sdXRpb249IjMwMDAwMDAvMTAwMDAiIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiIGV4aWY6Q29sb3JTcGFjZT0iNjU1MzUiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSI1NDkiIGV4aWY6UGl4ZWxZRGltZW5zaW9uPSI1NDkiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjA5NTQ5NzViLTdiYmEtNmM0Yi1iZmM3LWNhNWVkMWZjYWY2YyIgc3RFdnQ6d2hlbj0iMjAyMy0wMS0wM1QwMjo1OTo0MS0wNjowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIzLjUgKFdpbmRvd3MpIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDozMjgxOTFiNy03ZmEwLWEyNGItYTM5NC01ZDBhZTIyOTU0NzkiIHN0RXZ0OndoZW49IjIwMjMtMTAtMjRUMDI6Mzg6MjEtMDU6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMy41IChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6ZjY0NjkzNjgtNTA1MS0yYTQ3LWFhYzUtNDA4MWI4MGEzOWM4IiBzdEV2dDp3aGVuPSIyMDIzLTEwLTI0VDA0OjU0OjU4LTA1OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjMuNSAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iZGVyaXZlZCIgc3RFdnQ6cGFyYW1ldGVycz0iY29udmVydGVkIGZyb20gYXBwbGljYXRpb24vdm5kLmFkb2JlLnBob3Rvc2hvcCB0byBpbWFnZS9wbmciLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmJjY2MxMWZhLWNlMTctMmM0NS05NmEyLTIxODhlYjU4ZjE5MSIgc3RFdnQ6d2hlbj0iMjAyMy0xMC0yNFQwNDo1NDo1OC0wNTowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDIzLjUgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmNjQ2OTM2OC01MDUxLTJhNDctYWFjNS00MDgxYjgwYTM5YzgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDk1NDk3NWItN2JiYS02YzRiLWJmYzctY2E1ZWQxZmNhZjZjIiBzdFJlZjpvcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDk1NDk3NWItN2JiYS02YzRiLWJmYzctY2E1ZWQxZmNhZjZjIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+SpmIiAAAAt9JREFUaIHtmL9PE2Ech587ioEqFCwQZTOGINHogBMKSFQmiSTGRFwcmIxx8F8wcXJxMBqNiZODCSriYOLEoIkOKkQSTIiDqIC0JdJSkHK9c6i1hRzX9733xZakz3R9vz8/13t/3BnOKD+AGrYniQDQXOwuFKgxgUSxu1AgYRa7A1XKAopNWUCx0S+g5S50rkC3A12r0PoAMLSXyRLQmu3wK6g/nftt7IA9g1C1H8Z7tJbKou8fqO9d33w+dScg3KetVD4aBZz0toe6tJXKR+MccBTt/tAnwPqlZveJ+CQO90HjeahsJHM3N9zR6lbv+L2DEDq2YdAATLCiEBmC6LBwO/8yOKPEKXScbr4MLXekk0vz5Rp8vyUTkRAT0L01z68rb8JgLYh6l+BpdGeblHvpCXDk/u3SE4At5V2CAuQoC9DOWkzKXWwjm70Pjg1mJQTboLbDT2tiBFshvZS5thbAXvV0F9sHNlLXAwefQqDOX5Oe2LmVyIpB9BlMXQEn7eYsuJG5sesItI8pNCrB4msY63SzKGxkS+Mw/8h3uBSh49B00dWkNoljL5XCpdjd6zqsJsD4j4uY477BqXXQcE4pXIrYc9dh/wLqT0HDWd/hUkSeQNRdgL+vEk0D0LZFEzgdB8fKXKfmYP4xfL2+qbuYgEMvABuMSggegKp9GjrdhIl+iL8Dw4B0sqC7mIDwGcWuJEj9BHtZ2H1rlpG1KCQnYC0iHxuolXOXr+CBk4Kpq5kNLp0EsxqaLkDLbTCDWktl0SfAScH7o5D8lBuzV2DuIcTfQvsHMKu0lcui7xH6dnN98/ksT8L0DbE8RoVUWX0CoiMF7MNiedxPnZsiJiC7Lnth/1bPgZ2Z/BKICZgcKOwTCHnbKwRO7J8v5V5mBBGbxJEh+NgBDf1/X2JcPn2sTnvnSM3A7D0XgwHWIsRGMud+Sfy/0JQGJfhlTpKygGJjsn2ff4CaADDD9hWR+AOgZrz2m9pNhwAAAABJRU5ErkJggg=="
-        type="image/svg+xml">
+    <link rel="icon" href="{LOGO}" type="image/png">
     <style>
+        /* Self-contained on purpose: system fonts only, icons embedded as data URIs */
+        :root {
+            color-scheme: light dark;
+            --paper: #F4F6F9;
+            --surface: #FFFFFF;
+            --ink: #1D2230;
+            --muted: #5B6272;
+            --rule: #DDE1E8;
+            --row-hover: #F0F3F7;
+            --amber: #FFC107;
+            --enabled: #2E7D32;
+            --disabled: #C62828;
+            --neutral: #8A93A3;
+            --font-display: "Bahnschrift", "DIN Alternate", "Avenir Next Condensed", "Roboto Condensed", system-ui, sans-serif;
+            --font-body: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, monospace;
+        }
+
+        /* Screen only, so printing always uses the light theme */
+        @media screen and (prefers-color-scheme: dark) {
+            :root {
+                --paper: #12151C;
+                --surface: #191D26;
+                --ink: #E6E9EF;
+                --muted: #9AA2B1;
+                --rule: #2B313D;
+                --row-hover: #20252F;
+                --enabled: #6FCF73;
+                --disabled: #FF7A72;
+                --neutral: #6B7383;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            padding: 30px;
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
+            background: var(--paper);
+            color: var(--ink);
+            font: 15px/1.5 var(--font-body);
         }
 
-        h1.title {
-            font-size: 40px;
-            margin: 0px;
-            font-weight: 600;
-        }
-
-        h3.subtitle {
-            font-size: 18px;
-            color: gray;
-            margin: 0 0 20px 0;
-            font-weight: 300;
-        }
-
-        h2 {
-            font-size: 30px;
-            margin: 0 0 5px 0;
-            font-weight: 400;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-        }
-
-        .extensions .enabled h2,
-        .extensions .enabled a {
-            color: #388E3C;
-        }
-
-        .extensions .disabled h2,
-        .extensions .disabled a {
-            color: #D32F2F;
-        }
-
-        .extensions ol {
-            margin: 0;
-            padding: 0;
-        }
-
-        .extensions li {
-            margin: 0 0 2px 30px;
-            font-size: 16px;
-            list-style-type: square;
+        .page {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 32px 48px;
         }
 
         a {
-            text-decoration: none;
-            color: #424242;
+            color: inherit;
         }
 
-        a:hover {
-            text-decoration: underline;
-            color: #212121;
+        :focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: 2px;
         }
 
-        .extensions .enabled {
-            margin-top: 15px;
-        }
-
-        .extensions .disabled {
-            margin-top: 15px;
-        }
-
-        .crxdownload-icon {
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            background-image: url("{CRX_DOWNLOAD_ICON}");
-            background-size: contain;
-            display: none;
-        }
-
-        .stats-icon {
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            background-image: url("{STATS_ICON}");
-            background-size: contain;
-            display: none;
-        }
-
-        .crxcavator-icon {
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            background-image: url("{CRXCAVATOR_ICON}");
-            background-size: contain;
-            display: none;
-        }
-
-        .show-crxcavator-icons .crxcavator-icon {
-            display: inline-block;
-        }
-
-        .show-crxdownload-icons .crxdownload-icon {
-            display: inline-block;
-        }
-
-        .show-stats-icons .stats-icon {
-            display: inline-block;
-        }
-
-        .button-group {
-            margin-top: 10px;
+        /* Masthead: logo, condensed title, amber rule */
+        .masthead {
             display: flex;
-            flex-direction: row;
             align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--amber);
         }
 
-        .button-group-title {
-            font-size: 16px;
+        .masthead .logo {
+            width: 72px;
+            height: 72px;
+            flex: none;
+        }
+
+        .masthead h1 {
+            margin: 0 0 4px;
+            font-family: var(--font-display);
+            font-variation-settings: "wdth" 80;
             font-weight: 600;
-            margin-right: 10px;
+            font-size: 44px;
+            line-height: 1;
+        }
+
+        .meta,
+        .summary {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .meta {
+            color: var(--muted);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 32px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .toolbar-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-label {
+            margin-right: 4px;
+            font-size: 14px;
+            color: var(--muted);
         }
 
         button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            margin: 0;
-            border-radius: 0;
-            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font: inherit;
             font-size: 14px;
-        }
-
-        button:first-child {
-            border-radius: 5px 0 0 5px;
-        }
-
-        button:last-child {
-            border-radius: 0 5px 5px 0;
+            color: var(--ink);
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         button:hover {
-            background-color: #0056b3;
+            border-color: var(--muted);
         }
 
-        button:active {
-            background-color: #003d80;
+        button[aria-pressed="true"] {
+            color: var(--surface);
+            background: var(--ink);
+            border-color: var(--ink);
         }
 
-        .button-icon {
+        /* Icons are masks, so they take the text color in both themes */
+        .icon {
+            display: inline-block;
+            flex: none;
             width: 16px;
             height: 16px;
             vertical-align: middle;
-            margin-right: 5px;
+            background-color: currentColor;
+            -webkit-mask: var(--icon) center / contain no-repeat;
+            mask: var(--icon) center / contain no-repeat;
         }
 
-        button.rounded-left {
-            border-radius: 5px 0 0 5px;
+        .icon-text { --icon: url("{TEXT_ONLY_ICON}"); }
+        .icon-download { --icon: url("{DOWNLOAD_ICON}"); }
+        .icon-help { --icon: url("{HELP_ICON}"); }
+        .icon-stats { --icon: url("{STATS_ICON}"); }
+        .icon-security { --icon: url("{SECURITY_ICON}"); }
+        .icon-print { --icon: url("{PRINT_ICON}"); }
+
+        /* Sections, each marked with a status bar */
+        .extensions section {
+            margin-top: 36px;
         }
 
-        button.rounded-right {
-            border-radius: 0 5px 5px 0;
+        .enabled { --status: var(--enabled); }
+        .disabled { --status: var(--disabled); }
+        .apps, .themes { --status: var(--neutral); }
+
+        .extensions h2 {
+            margin: 0 0 12px;
+            padding-left: 12px;
+            border-left: 4px solid var(--status);
+            font-family: var(--font-display);
+            font-variation-settings: "wdth" 85;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 1.2;
         }
 
-        #copyToClipboard {
-            border-radius: 5px;
-            /* Explicitly round the corners */
+        .count {
+            margin-left: 6px;
+            font-weight: 400;
+            color: var(--muted);
         }
 
-        textarea {
-            width: 100%;
-            height: 600px;
-            padding: 10px;
-            font-family: monospace;
+        .note {
+            max-width: 80ch;
+            margin: 0 0 12px;
             font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: none;
-            white-space: pre;
+            color: var(--muted);
         }
 
-        .center-text {
-            text-align: center;
+        .note code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
         }
 
-        .toggle-title {
-            margin-left: 10px;
+        /* Hide empty sections, but keep Apps so its note explains why it can be empty */
+        .extensions > section:not(.apps):not(:has(tbody tr)),
+        .apps .table-wrap:not(:has(tbody tr)) {
+            display: none;
+        }
+
+        /* Tables share a fixed layout so columns line up across sections */
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+        }
+
+        /* Narrow screens scroll the table sideways instead of crushing the description column */
+        table {
+            width: 100%;
+            min-width: 1000px;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        td {
+            padding: 8px 12px;
+            vertical-align: top;
+            border-top: 1px solid var(--rule);
+            overflow-wrap: anywhere;
+        }
+
+        tbody tr:first-child td {
+            border-top: 0;
+        }
+
+        tbody tr:hover {
+            background: var(--row-hover);
+        }
+
+        .col-name { width: 28%; }
+        .col-version { width: 110px; }
+        .col-id { width: 280px; white-space: nowrap; }
+        .col-links { width: 72px; white-space: nowrap; }
+
+        .col-name a {
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .col-name a:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--amber);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+
+        .col-version {
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .col-description {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .ext-id {
+            all: unset;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--muted);
+            cursor: copy;
+        }
+
+        .ext-id:hover {
+            color: var(--ink);
+        }
+
+        /* Restore the focus ring that "all: unset" removed */
+        .ext-id:focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: 2px;
+        }
+
+        .ext-id.copied::after {
+            content: " copied";
+            font-family: var(--font-body);
+            color: var(--enabled);
+        }
+
+        .col-links a {
+            display: inline-flex;
+            padding: 2px;
+            color: var(--muted);
+        }
+
+        .col-links a:hover {
+            color: var(--ink);
+        }
+
+        /* Toggles */
+        body:not(.show-ids) .col-id,
+        body:not(.show-stats-icons):not(.show-security-icons) .col-links,
+        body:not(.show-stats-icons) .link-stats,
+        body:not(.show-security-icons) .link-security {
+            display: none;
+        }
+
+        footer {
+            margin-top: 48px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                padding: 20px 16px 40px;
+            }
+
+            .masthead .logo {
+                width: 56px;
+                height: 56px;
+            }
+
+            .masthead h1 {
+                font-size: 34px;
+            }
         }
 
         @media print {
-            .button-group {
+            :root {
+                color-scheme: light;
+            }
+
+            body {
+                background: #FFFFFF;
+            }
+
+            .toolbar,
+            .note,
+            footer {
                 display: none;
+            }
+
+            .table-wrap {
+                overflow: visible;
+                border: 0;
+            }
+
+            table {
+                min-width: 0;
             }
         }
     </style>
 </head>
 
-<body class="show-crxdownload-icons show-stats-icons show-crxcavator-icons">
-    <h1 class="title">Extension Export</h1>
-    <h3 class="subtitle">{TIMESTAMP}</h3>
+<body class="show-ids show-stats-icons show-security-icons">
+    <main class="page">
+        <header class="masthead">
+            <img src="{LOGO}" alt="Extension Exporter logo" class="logo">
+            <div>
+                <h1>Installed extensions</h1>
+                <p class="meta">Exported {TIMESTAMP}</p>
+                <p class="summary">{SUMMARY}</p>
+            </div>
+        </header>
 
-    <div class="button-group">
-        <div class="button-group-title">Options</div>
-        <button id="showTextOnly" class="rounded-left">
-            <img src="{TEXT_ONLY_ICON}" class="button-icon"> Text-Only Listing
-        </button>
-        <button id="showHelp" class="rounded-right">
-            <img src="{HELP_ICON}" class="button-icon"> Help
-        </button>
-        <div class="button-group-title toggle-title">Toggle</div>
-        <button id="toggleCrxIcons" class="rounded-left">
-            <img src="{CRX_DOWNLOAD_ICON}" class="button-icon"> CRX Download
-        </button>
-        <button id="toggleStats">
-            <img src="{STATS_ICON}" class="button-icon"> Stats
-        </button>
-        <button id="toggleCRXcavator" class="rounded-right">
-            <img src="{CRXCAVATOR_ICON}" class="button-icon"> CRXcavator Report
-        </button>
-    </div>
-
-    <div class="extensions">
-        <div class="enabled">
-            <h2>Enabled Extensions</h2>
-            <ol>
-                {ENABLED_EXTENSIONS}
-            </ol>
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button id="showTextOnly" type="button"><span class="icon icon-text"></span>Text-only listing</button>
+                <button id="downloadJson" type="button"><span class="icon icon-download"></span>Download JSON</button>
+                <button id="downloadCsv" type="button"><span class="icon icon-download"></span>Download CSV</button>
+                <button id="showHelp" type="button"><span class="icon icon-help"></span>Help</button>
+            </div>
+            <div class="toolbar-group">
+                <span class="toolbar-label">Show</span>
+                <button id="toggleIds" type="button" aria-pressed="true">IDs</button>
+                <button id="toggleStats" type="button" aria-pressed="true"><span class="icon icon-stats"></span>Stats links</button>
+                <button id="toggleSecurity" type="button" aria-pressed="true"><span class="icon icon-security"></span>Security reports</button>
+            </div>
         </div>
 
-        <div class="disabled">
-            <h2>Disabled Extensions</h2>
-            <ol>
-                {DISABLED_EXTENSIONS}
-            </ol>
-        </div>
-    </div>
+        <div class="extensions">
+            <section class="enabled">
+                <h2>Enabled extensions<span class="count">{COUNT_ENABLED_EXTENSIONS}</span></h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                        </thead>
+                        <tbody>{ENABLED_EXTENSIONS}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
-    <!-- Hidden JSON object for use by script -->
-    <div id="textOnlyListingJson" data-json="{TEXT_LISTING_JSON}" style="display:none;"></div>
+            <section class="disabled">
+                <h2>Disabled extensions<span class="count">{COUNT_DISABLED_EXTENSIONS}</span></h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                        </thead>
+                        <tbody>{DISABLED_EXTENSIONS}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="apps">
+                <h2>Apps<span class="count">{COUNT_APPS}</span></h2>
+                <p class="note">Only legacy Chrome Apps can be listed here. Web apps added with "Install app" are hidden from extensions, so open <code>chrome://apps</code> or <code>edge://apps</code> to see those.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                        </thead>
+                        <tbody>{APPS}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="themes">
+                <h2>Themes<span class="count">{COUNT_THEMES}</span></h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                        </thead>
+                        <tbody>{THEMES}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <footer>Created with <a href="{GENERATOR_URL}" target="_blank">Extension Exporter</a> {EXPORTER_VERSION}</footer>
+    </main>
+
+    <!-- Hidden listing data for use by script -->
+    <div id="listingJson" data-json="{LISTING_JSON}" hidden></div>
+    <div id="listingCsv" data-csv="{LISTING_CSV}" hidden></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const textOnlyListingJson = JSON.parse(document.getElementById('textOnlyListingJson').getAttribute('data-json'));
+            const listing = JSON.parse(document.getElementById('listingJson').getAttribute('data-json'));
 
-            const generateTextListing = () => {
-                let textListing = '';
-                textOnlyListingJson.forEach(extension => {
-                    textListing += `<p>${extension.name} ${extension.version}<br>`;
-                    textListing += `Store URL: ${extension.storeUrl}<br>`;
-                    if (document.body.classList.contains('show-crxdownload-icons')) {
-                        textListing += `CRX Link: ${extension.crxLink}<br>`;
-                    }
-                    if (document.body.classList.contains('show-stats-icons')) {
-                        textListing += `Stats Link: ${extension.statsLink}<br>`;
-                    }
-                    if (document.body.classList.contains('show-crxcavator-icons')) {
-                        textListing += `CRXcavator Link: ${extension.crxcavatorLink}<br>`;
-                    }
-                    textListing += `</p>`;
+            // Escape text before writing it into a popup document
+            const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+            const isShown = (className) => document.body.classList.contains(className);
+
+            // Popups reuse this page's stylesheet so they match the theme
+            const baseStyle = document.querySelector('style').outerHTML;
+
+            // Toggles, with their pressed state kept in sync for styling and screen readers
+            const bindToggle = (buttonId, className) => {
+                const button = document.getElementById(buttonId);
+                button.addEventListener('click', () => button.setAttribute('aria-pressed', document.body.classList.toggle(className)));
+            };
+            bindToggle('toggleIds', 'show-ids');
+            bindToggle('toggleStats', 'show-stats-icons');
+            bindToggle('toggleSecurity', 'show-security-icons');
+
+            // Click an extension ID to copy it
+            document.addEventListener('click', function (event) {
+                const idElement = event.target.closest('.ext-id');
+                if (!idElement) return;
+                navigator.clipboard.writeText(idElement.textContent).then(function () {
+                    idElement.classList.add('copied');
+                    setTimeout(() => idElement.classList.remove('copied'), 1500);
                 });
-                return textListing.trim();
+            });
+
+            // Save a file next to the export
+            const saveFile = (content, extension, type) => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([content], { type }));
+                a.download = `Extension Export {FILE_TIMESTAMP}.${extension}`;
+                a.click();
             };
 
-            // Toggle CRX icons
-            document.getElementById('toggleCrxIcons').addEventListener('click', function () {
-                document.body.classList.toggle('show-crxdownload-icons');
-            });
+            // Download JSON or CSV
+            document.getElementById('downloadJson').addEventListener('click', () => saveFile(JSON.stringify(listing, null, 2), 'json', 'application/json'));
+            document.getElementById('downloadCsv').addEventListener('click', () => saveFile(document.getElementById('listingCsv').getAttribute('data-csv'), 'csv', 'text/csv'));
 
-            // Toggle Stats icons
-            document.getElementById('toggleStats').addEventListener('click', function () {
-                document.body.classList.toggle('show-stats-icons');
-            });
+            // Open a themed popup window
+            const openPopup = (title, extraStyle, body) => {
+                const width = screen.width * 0.7;
+                const height = screen.height * 0.7;
+                const popup = window.open('', '_blank', `width=${width},height=${height},left=${(screen.width - width) / 2},top=${(screen.height - height) / 2}`);
+                popup.document.write(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>${title}</title>${baseStyle}<style>${extraStyle}</style></head><body><main class="page">${body}</main></body></html>`);
+                popup.document.close();
+            };
 
-            // Toggle CRXcavator icons
-            document.getElementById('toggleCRXcavator').addEventListener('click', function () {
-                document.body.classList.toggle('show-crxcavator-icons');
-            });
-
-            // Calculate popup dimensions
-            function calculatePopupDimensions(widthPercent, heightPercent) {
-                let width = screen.width * (widthPercent / 100);
-                let height = screen.height * (heightPercent / 100);
-                let left = (screen.width - width) / 2;
-                let top = (screen.height - height) / 2;
-                return { width, height, left, top };
-            }
-
-            // Text-Only Listing
+            // Text-only listing
             document.getElementById('showTextOnly').addEventListener('click', function () {
-                const textOnlyListingJson = JSON.parse(document.getElementById('textOnlyListingJson').getAttribute('data-json'));
+                // One labeled line, skipped when there is no value
+                const line = (label, value) => value ? `<dt>${label}</dt><dd>${esc(value)}</dd>` : '';
 
-                let dimensions = calculatePopupDimensions(80, 60);
-                let popupWindow = window.open('', '_blank', `width=${dimensions.width},height=${dimensions.height},left=${dimensions.left},top=${dimensions.top}`);
+                const entries = listing.map((extension) => `
+                    <article class="entry">
+                        <h2>${esc(extension.name)} ${esc(extension.version)}${extension.enabled ? '' : ' (disabled)'}</h2>
+                        <dl>
+                            ${isShown('show-ids') ? line('ID', extension.id) : ''}
+                            ${line('Description', extension.description)}
+                            ${line('Store URL', extension.storeUrl)}
+                            ${line('CRX link', extension.crxLink)}
+                            ${isShown('show-stats-icons') ? line('Stats link', extension.statsLink) : ''}
+                            ${isShown('show-security-icons') ? line('Security report', extension.securityLink) : ''}
+                        </dl>
+                    </article>`).join('');
 
-                let popupContent = `
-                    <html>
-                    <head>
-                        <title>Extension Export {TIMESTAMP}</title>
-                        <style>
-                            body {
-                                font-family: 'Roboto', sans-serif;
-                                line-height: 1.6;
-                                padding: 30px;
-                                text-align: left;
-                            }
-                            h1 {
-                                font-size: 40px;
-                                font-weight: 600;
-                                margin: 0 0 20px 0;
-                            }
-                            h3 {
-                                font-size: 18px;
-                                color: gray;
-                                margin: 0 0 20px 0;
-                                font-weight: 300;
-                            }
-                            .print-icon {
-                                cursor: pointer;
-                                margin-bottom: 20px;
-                                display: flex;
-                                align-items: center;
-                                color: #007bff;
-                            }
-                            .print-icon img {
-                                width: 24px;
-                                height: 24px;
-                                margin-right: 8px;
-                            }
-                            .print-icon span {
-                                color: #007bff;
-                                font-size: 16px;
-                            }
-                            @media print {
-                                .print-icon {
-                                    display: none;
-                                }
-                            }
-                            .extension-title {
-                                font-weight: bold;
-                                font-size: 18px;
-                                margin-bottom: 5px;
-                            }
-                            .extension-detail {
-                                font-size: 14px;
-                                margin-bottom: 15px;
-                            }
-                            .extension-detail strong {
-                                display: block;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Extension Export</h1>
-                        <h3>{TIMESTAMP}</h3>
-                        <div class="print-icon" onclick="window.print();">
-                            <img src="{PRINT_ICON}" alt="Print">
-                            <span>Print</span>
-                        </div>`;
-
-                textOnlyListingJson.forEach(extension => {
-                    popupContent += `
-                        <div class="extension-detail">
-                            <div class="extension-title">${extension.name} ${extension.version}</div>
-                            <strong>Store URL:</strong> ${extension.storeUrl}`;
-                    if (document.body.classList.contains('show-crxdownload-icons')) {
-                        popupContent += `<strong>CRX Link:</strong> ${extension.crxLink}`;
-                    }
-                    if (document.body.classList.contains('show-stats-icons')) {
-                        popupContent += `<strong>Stats Link:</strong> ${extension.statsLink}`;
-                    }
-                    if (document.body.classList.contains('show-crxcavator-icons')) {
-                        popupContent += `<strong>CRXcavator Link:</strong> ${extension.crxcavatorLink}`;
-                    }
-                    popupContent += `</div>`;
-                });
-
-                popupContent += `
-                    </body>
-                    </html>`;
-
-                popupWindow.document.write(popupContent);
-                popupWindow.document.close();
+                openPopup('Extension Export {TIMESTAMP}', `
+                    .page { max-width: 900px; }
+                    .masthead h1 { font-size: 36px; }
+                    .entry { padding: 14px 0; border-bottom: 1px solid var(--rule); break-inside: avoid; }
+                    .entry h2 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 18px; }
+                    .entry dl { display: grid; grid-template-columns: max-content 1fr; gap: 2px 16px; margin: 0; font-size: 14px; }
+                    .entry dt { color: var(--muted); }
+                    .entry dd { margin: 0; overflow-wrap: anywhere; }`, `
+                    <header class="masthead">
+                        <img src="{LOGO}" alt="Extension Exporter logo" class="logo">
+                        <div>
+                            <h1>Installed extensions</h1>
+                            <p class="meta">Exported {TIMESTAMP}</p>
+                        </div>
+                    </header>
+                    <div class="toolbar">
+                        <button type="button" onclick="window.print();"><span class="icon icon-print"></span>Print</button>
+                    </div>
+                    ${entries}`);
             });
 
             // Help
             document.getElementById('showHelp').addEventListener('click', function () {
-                let dimensions = calculatePopupDimensions(60, 60);
-                let helpPopup = window.open('', '_blank', `width=${dimensions.width},height=${dimensions.height},left=${dimensions.left},top=${dimensions.top}`);
-                let helpContent = `
-                    <html>
-                    <head>
-                        <title>Help</title>
-                        <style>
-                            body {
-                                font-family: 'Roboto', sans-serif;
-                                line-height: 1.6;
-                                padding: 20px;
-                            }
-                            h1 {
-                                font-size: 24px;
-                                font-weight: bold;
-                                margin-bottom: 10px;
-                            }
-                            p {
-                                margin-bottom: 10px;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <h1>Help</h1>
-                        <h2>Options</h2>
-                        <p><strong>Text-Only Listing:</strong> Displays a plain text listing of all extensions. This includes a copy-to-clipboard function and the option to print the listing.</p>
-                        <p><strong>Help:</strong> Provides information on the functionality of each button and option available in the extension exporter tool.</p>
+                openPopup('Help', `
+                    .page { max-width: 72ch; }
+                    .page h1 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 600; font-size: 32px; }
+                    .page h2 { margin: 28px 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 20px; }
+                    .page p { margin: 0 0 10px; }
+                    .fine-print { font-size: 13px; color: var(--muted); }`, `
+                    <h1>Help</h1>
+                    <p>Extensions are listed in tables by whether they are enabled. Apps and themes have their own sections. Click a name to open its store page.</p>
 
-                        <h2>Toggle</h2>
-                        <p><strong>CRX Download:</strong> Provides a direct link to download the extension's CRX file, which can be used for offline installation or backup purposes.</p>
-                        <p><strong>Stats:</strong> Offers a link to the extension's statistics page on the Chrome Web Store or Edge Add-ons site, where you can view user ratings, reviews, and other performance metrics. For more details, visit 
-                            <a href="https://chrome-stats.com" target="_blank">Chrome-Stats.com</a> and 
-                            <a href="https://edge-stats.com" target="_blank">Edge-Stats.com</a>. These sites provide comprehensive analytics and insights on extension performance, including download counts, active users, and more.</p>
-                        <p><strong>CRXcavator Report:</strong> Links to the CRXcavator security analysis report, providing detailed insights into the security and privacy aspects of the extension. CRXcavator performs automated analysis of Chrome extensions to assess their risk and provide recommendations. Learn more at 
-                            <a href="https://crxcavator.io" target="_blank">CRXcavator.io</a>.</p>
+                    <h2>Buttons</h2>
+                    <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, with an option to print.</p>
+                    <p><strong>Download JSON</strong> saves the full listing, including IDs, descriptions, and all links.</p>
+                    <p><strong>Download CSV</strong> saves the same listing as a file that opens in Excel or any spreadsheet app.</p>
 
-                        <h2>Disclaimer</h2>
-                        <p style="font-size: 12px;">
-                            The author of Extension Exporter is not affiliated with Chrome-Stats.com, Edge-Stats.com, or CRXcavator.com. The author makes no guarantee regarding their effectiveness or accuracy. All information provided by these tools is based on data available from the respective platforms and automated analysis tools. Always review extension permissions and ratings before installation. All rights reserved.
-                        </p>
-                    </body>
-                    </html>
-                `;
-                helpPopup.document.write(helpContent);
-                helpPopup.document.close();
+                    <h2>Show</h2>
+                    <p><strong>IDs</strong> shows the ID column. Click an ID to copy it, for example to use in a browser policy.</p>
+                    <p><strong>Stats links</strong> link to each extension's statistics on <a href="https://chrome-stats.com" target="_blank">Chrome-Stats.com</a> or <a href="https://edge-stats.com" target="_blank">Edge-Stats.com</a>, with user counts, ratings, and history.</p>
+                    <p><strong>Security reports</strong> link to a <a href="https://crxaminer.tech" target="_blank">CRXaminer</a> analysis of the extension, covering its permissions, risk rating, and the remote servers it contacts. CRXaminer only covers extensions from the Chrome Web Store.</p>
+
+                    <h2>Apps</h2>
+                    <p>Only legacy Chrome Apps are visible to extensions. Web apps added with "Install app" are not, so open chrome://apps or edge://apps to see those.</p>
+
+                    <h2>CRX files</h2>
+                    <p>Browsers block CRX downloads started from a local HTML file, so CRX links are listed as text only. Download them with a tool like wget or curl. Extensions installed from a CRX file do not update automatically, so installing from the Chrome Web Store or Edge Add-ons is recommended.</p>
+
+                    <h2>Disclaimer</h2>
+                    <p class="fine-print">The author of Extension Exporter is not affiliated with Chrome-Stats.com, Edge-Stats.com, or CRXaminer. The author makes no guarantee regarding their effectiveness or accuracy. All information provided by these tools is based on data available from the respective platforms and automated analysis tools. Always review extension permissions and ratings before installation.</p>`);
             });
         });
-
-        function explainCrxDownload() {
-            alert("Due to Chrome security changes, CRX files can't be downloaded directly from this HTML file because it is outside the Chrome extension context.\n\n" +
-                "To download:\n" +
-                "- Copy the CRX link from the text-only listing and download it manually using a command-line tool like wget or curl.\n" +
-                "OR\n" +
-                "- Use the CRX Extractor/Downloader extension from the Chrome Web Store.\n\n" +
-                "The CRX Extractor/Downloader works because it runs within Chrome's extension environment, which allows it to bypass the security restrictions that prevent downloads from this HTML file.\n\n" +
-                "Note: If you install a CRX file directly, it won't receive automatic updates when a new version is released. For this reason, we recommend installing extensions directly from the Chrome Web Store or Edge Add-ons site.");
-        }        
     </script>
-
 </body>
 
 </html>

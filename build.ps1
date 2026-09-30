@@ -33,8 +33,8 @@ function Create-ZipFile {
         [string]$zipFileName
     )
 
-    # Create the zip file
-    Compress-Archive -Path $sourceFolder -DestinationPath $zipFileName -Force
+    # Zip the folder's contents, not the folder itself, so manifest.json sits at the zip root as the stores expect
+    Compress-Archive -Path (Join-Path $sourceFolder '*') -DestinationPath $zipFileName -Force
 
     Write-Output "Zip file created: $zipFileName"
 }

@@ -6,7 +6,7 @@ https://github.com/asheroto/Extension-Exporter/assets/49938263/c348aceb-dfaa-4e3
 [![GitHub Downloads - All Releases](https://img.shields.io/github/downloads/asheroto/Extension-Exporter/total)](https://github.com/asheroto/Extension-Exporter/releases)
 [![GitHub Sponsor](https://img.shields.io/github/sponsors/asheroto?label=Sponsor&logo=GitHub)](https://github.com/sponsors/asheroto)
 <a href="https://ko-fi.com/asheroto"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Ko-Fi Button" height="20px"></a>
-<a href="https://www.buymeacoffee.com/asheroto"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=seb6596&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=asheroto&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff)" height="40px"></a>
+<a href="https://www.buymeacoffee.com/asheroto"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=asheroto&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" height="40px"></a>
 
 # Extension Exporter
 
@@ -22,16 +22,19 @@ Available on both the [Chrome Web Store](https://chromewebstore.google.com/detai
 - **Local Execution**: All code runs locally without connecting to remote servers.
 - **Easy-to-use**: Click the extension button to instantly generate the HTML file.
 - **Cross-browser compatibility**: Currently functions on both Chrome and Edge browsers.
+- **Table Layout**: Each section is a table with name, version, ID, description, and links columns.
 - **Separate Enabled and Disabled Extensions**: Clearly distinguish between enabled and disabled extensions.
-- [(Removed - see below)](#feature-removal) **CRX Download Links**: Includes download links (CRX) for each extension.
-- **Text-only Listing**: Offers a text-based listing with both copy-to-clipboard functionality and a print option.
-- [(Removed soon - see below)](#feature-removal) **Toggle CRX Download**: Easily toggle visibility of CRX download icons.
+- **Separate Apps and Themes**: Apps and themes are listed in their own sections instead of mixed in with extensions. Only legacy Chrome Apps are visible to extensions. Web apps added with "Install app" are not, so the export points you to `chrome://apps` or `edge://apps` for those.
+- **Light and Dark Themes**: The export follows your system's light or dark setting, prints in light, and stays fully self-contained with no external fonts or files.
+- **Extension IDs**: Shows each extension's ID. Click an ID to copy it, which is handy for browser policies such as force-install lists.
+- **Text-only Listing**: Offers a text-based listing, including CRX links, with a print option.
+- **Download JSON or CSV**: Saves the full listing, including IDs, descriptions, and links, as a JSON file or as a CSV file that opens in Excel.
 - **Toggle Stats**: View extension stats using [Chrome-Stats.com](https://chrome-stats.com/) or [Edge-Stats.com](https://edge-stats.com/). These sites provide statistics on the usage, popularity, and ratings of Chrome and Edge extensions, aiding users in assessing their reliability and performance.
-- **Toggle CRXcavator Report**: Access [CRXcavator](https://crxcavator.io/) reports for extensions, providing detailed security assessments, including information on the remote servers to which the extension connects, to evaluate the security risks associated with browser extensions.
+- **Toggle Security Report**: Access [CRXaminer](https://crxaminer.tech/) reports for Chrome Web Store extensions, covering permissions, a risk rating, and the remote servers the extension contacts. This replaces CRXcavator, which Cisco shut down.
 
 ## Installation
 
-This extension is available on the [Chrome Web Store](https://chrome.google.com/webstore/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb). This is the recommended installation approach. Alternatively, you can install the CRX file in releases.
+This extension is available on the [Chrome Web Store](https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb). This is the recommended installation approach. Alternatively, you can install the CRX file in releases.
 
 ## Open Source
 
@@ -39,12 +42,11 @@ This extension is fully open-source to ensure both transparency and security. Yo
 
 ## Feature Removal  
 
-Some features have been **removed** or will be removed soon due to Chrome security changes.  
+Some features have been **removed** due to Chrome security changes or discontinued services.
 
-- **CRX Download Links** – No longer functional due to browser restrictions. Use the CRX link from the text-only listing with `wget`, `curl`, or the [CRX Extractor/Downloader](https://chromewebstore.google.com/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda) extension.  
-- **Toggle CRX Download** – Will be removed as CRX downloads no longer work from the exported HTML file.  
-
-Chrome now prevents direct CRX downloads from external HTML files for security reasons. **Manually installed CRX files also won't update automatically**, so we recommend installing from the **Chrome Web Store** or **Edge Add-ons Store** for updates and security patches.
+- **CRX Download Links and Toggle** - Removed because Chrome prevents direct CRX downloads from external HTML files. Use the CRX link from the text-only listing or the JSON download with `wget`, `curl`, or the [CRX Extractor/Downloader](https://chromewebstore.google.com/detail/crx-extractordownloader/ajkhmmldknmfjnmeedkbkkojgobmljda) extension.
+- **CRXcavator Report** - Replaced by the CRXaminer security report, because CRXcavator is no longer online.
+**Manually installed CRX files also won't update automatically**, so we recommend installing from the **Chrome Web Store** or **Edge Add-ons Store** for updates and security patches.
 
 ## Contributing Guidelines
 
@@ -64,7 +66,7 @@ If you found this extension helpful and want to show your appreciation, consider
 
 ## Rate and Feedback
 
-If you enjoyed using this extension, please take a moment to [rate it on the Chrome Web Store](https://chrome.google.com/webstore/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb).
+If you enjoyed using this extension, please take a moment to [rate it on the Chrome Web Store](https://chromewebstore.google.com/detail/extension-exporter/doikmfpjbcjjimnbablebijofdbgfepb).
 
 For feature requests and bug reports, visit the [Issues](https://github.com/asheroto/Extension-Exporter/issues) tab.
 
@@ -75,7 +77,9 @@ For feature requests and bug reports, visit the [Issues](https://github.com/ashe
 - [x] Add copy to clipboard button
 - [x] Improve page that opens when clicking on the icon
 - [x] Work with [Edge Add-ons](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home)
-- [ ] Switch to a table format?
-    -   [ ] Include extension ID w/copy button
-    -   [ ] Include extension description
-- [ ] Separate Apps from Extensions (issue [#4](https://github.com/asheroto/Extension-Exporter/issues/4))
+- [x] Include extension ID w/copy button
+- [x] Include extension description
+- [x] Separate Apps from Extensions (issue [#4](https://github.com/asheroto/Extension-Exporter/issues/4))
+- [x] Export as JSON and CSV
+- [x] Replace CRXcavator with CRXaminer
+- [x] Switch to a table format

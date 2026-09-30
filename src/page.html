@@ -4,67 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <title>Extension Exporter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="img/48.png" type="image/png">
     <style>
+        /* Same tokens as the export (template.html), so both pages match */
+        :root {
+            color-scheme: light dark;
+            --paper: #F4F6F9;
+            --ink: #1D2230;
+            --muted: #5B6272;
+            --rule: #DDE1E8;
+            --amber: #FFC107;
+            --font-display: "Bahnschrift", "DIN Alternate", "Avenir Next Condensed", "Roboto Condensed", system-ui, sans-serif;
+            --font-body: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --paper: #12151C;
+                --ink: #E6E9EF;
+                --muted: #9AA2B1;
+                --rule: #2B313D;
+            }
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-            font-size: 16px;
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font: 16px/1.6 var(--font-body);
         }
 
-        .container {
-            max-width: 600px;
+        .page {
+            max-width: 620px;
             margin: 0 auto;
-            text-align: center;
+            padding: 12vh 24px 48px;
         }
 
-        .title {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        :focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: 2px;
         }
 
-        .button {
-            margin-top: 20px;
+        /* Masthead: logo, condensed title, amber rule */
+        .masthead {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--amber);
         }
 
-        .button img {
-            height: 40px;
+        .logo {
+            width: 72px;
+            height: 72px;
+            flex: none;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: var(--font-display);
+            font-variation-settings: "wdth" 80;
+            font-weight: 600;
+            font-size: 44px;
+            line-height: 1;
+        }
+
+        .lead {
+            font-size: 19px;
+        }
+
+        p {
+            margin: 0 0 16px;
+        }
+
+        .support {
+            color: var(--muted);
+        }
+
+        .coffee {
+            display: inline-block;
+            margin: 8px 0 24px;
+        }
+
+        .coffee img {
+            display: block;
+            height: 44px;
         }
 
         .links {
-            margin-top: 20px;
+            margin: 32px 0 0;
+            padding: 0;
+            list-style: none;
+            border-top: 1px solid var(--rule);
+        }
+
+        .links li {
+            border-bottom: 1px solid var(--rule);
         }
 
         .links a {
-            color: #007bff;
+            display: block;
+            padding: 12px 0;
+            color: var(--ink);
             text-decoration: none;
         }
 
         .links a:hover {
             text-decoration: underline;
+            text-decoration-color: var(--amber);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding-top: 32px;
+            }
+
+            .logo {
+                width: 56px;
+                height: 56px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <p class="title">Extension Exporter</p>
-        <p>Thanks for using Extension Exporter! An export of your extensions has been downloaded to your computer. Please check your downloads folder.</p>
-        <p>If you found this extension helpful and want to show your appreciation, consider making a small donation to the developer. Your support is greatly appreciated and helps keep the coffee flowing, allowing me to continue working on other cool projects like this!</p>
-        <div class="button">
-            <!-- Buy Me a Coffee button -->
-            <a href="https://www.buymeacoffee.com/asheroto" target="_blank">
-                <img src="img/bmac.svg" alt="Buy Me a Coffee">
-            </a>
-        </div>
-        <p>If you don't want to support the developer at this time, that's okay too!<br>Enjoy the extension and have a fantastic day! 😊</p>
-        <div class="links">
-            <p><a href="{STORE_URL}" target="_blank">Rate this extension on {STORE_NAME}</a></p>
-            <p><a href="https://github.com/asheroto/Extension-Exporter/issues" target="_blank">Report bugs or request a new feature</a></p>
-            <p><a href="https://github.com/asheroto/Extension-Exporter" target="_blank">GitHub repository</a></p>
-        </div>
-    </div>
+    <main class="page">
+        <header class="masthead">
+            <img src="img/128.png" alt="Extension Exporter logo" class="logo">
+            <h1>Extension Exporter</h1>
+        </header>
+
+        <p class="lead">Thanks for using Extension Exporter! An export of your extensions has been downloaded to your computer. Please check your downloads folder.</p>
+        <p class="support">If you found this extension helpful and want to show your appreciation, consider making a small donation to the developer. Your support is greatly appreciated and helps keep the coffee flowing, allowing me to continue working on other cool projects like this!</p>
+
+        <!-- Buy Me a Coffee button -->
+        <a class="coffee" href="https://www.buymeacoffee.com/asheroto" target="_blank">
+            <img src="img/bmac.svg" alt="Buy Me a Coffee">
+        </a>
+
+        <p class="support">If you don't want to support the developer at this time, that's okay too!<br>Enjoy the extension and have a fantastic day! 😊</p>
+
+        <ul class="links">
+            <li><a href="{STORE_URL}" target="_blank">Rate this extension on {STORE_NAME}</a></li>
+            <li><a href="https://github.com/asheroto/Extension-Exporter/issues" target="_blank">Report bugs or request a new feature</a></li>
+            <li><a href="https://github.com/asheroto/Extension-Exporter" target="_blank">GitHub repository</a></li>
+        </ul>
+    </main>
     <script type="module" src="page.js"></script>
 </body>
 
