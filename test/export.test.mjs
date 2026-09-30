@@ -15,7 +15,7 @@ const extensions = [
     { id: 'e'.repeat(32), name: 'Dark Theme', version: '4.0', type: 'theme', enabled: true, description: '', updateUrl: chromeUpdate }
 ];
 
-const html = buildExport(extensions, template, { exporterVersion: '9.9.9', generatorUrl: 'https://example.com', timestamp: 'NOW', fileTimestamp: 'FILE', logo: 'data:image/png;base64,AAAA' });
+const html = buildExport(extensions, template, { exporterVersion: '9.9.9', browserVersion: '140.0', generatorUrl: 'https://example.com', timestamp: 'NOW', fileTimestamp: 'FILE', logo: 'data:image/png;base64,AAAA' });
 const section = (name) => html.split(`<section class="${name}">`)[1].split('</section>')[0];
 
 // Hostile names and descriptions are escaped
@@ -45,6 +45,8 @@ assert.ok(html.includes(`https://microsoftedge.microsoft.com/addons/detail/${'b'
 assert.ok(!html.includes(`crxaminer.tech/scan/${'b'.repeat(32)}`), 'no CRXaminer link for Edge-hosted items');
 assert.ok(!html.includes(`chrome-stats.com/d/${'c'.repeat(32)}`), 'no stats link for unknown platform');
 assert.ok(!html.includes('crxcavator'), 'CRXcavator must be gone');
+assert.ok(html.includes(`prodversion=140.0&amp;acceptformat=crx3&amp;x=id%3D${'a'.repeat(32)}`), 'CRX link carries the exporting browser version');
+assert.ok(!html.includes('{BROWSER_VERSION}'));
 
 // Every placeholder is filled, and the embedded JSON round-trips
 const leftovers = html.replaceAll("Price $&#39; {TIMESTAMP}", '').replaceAll("Price $' {TIMESTAMP}", '').match(/\{[A-Z_]+\}/g);

@@ -35,9 +35,10 @@ export const urls = {
         Chrome: 'https://chrome-stats.com/d/{EXTENSION_ID}',
         Edge: 'https://edge-stats.com/d/{EXTENSION_ID}'
     },
+    // prodversion must be at least the extension's minimum browser version or Google returns nothing, so the exporting browser's version is filled in
     crxdownloadUrl: {
-        Chrome: 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion=49.0&acceptformat=crx3&x=id%3D{EXTENSION_ID}%26installsource%3Dondemand%26uc',
-        Edge: 'https://edge.microsoft.com/extensionwebstorebase/v1/crx?response=redirect&prodversion=49.0&acceptformat=crx3&x=id%3D{EXTENSION_ID}%26installsource%3Dondemand%26uc'
+        Chrome: 'https://clients2.google.com/service/update2/crx?response=redirect&prodversion={BROWSER_VERSION}&acceptformat=crx3&x=id%3D{EXTENSION_ID}%26installsource%3Dondemand%26uc',
+        Edge: 'https://edge.microsoft.com/extensionwebstorebase/v1/crx?response=redirect&prodversion={BROWSER_VERSION}&acceptformat=crx3&x=id%3D{EXTENSION_ID}%26installsource%3Dondemand%26uc'
     },
     // ponytail: CRXaminer only scans Chrome Web Store IDs, so Edge-hosted entries get no security link
     securityUrl: {

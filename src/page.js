@@ -64,7 +64,7 @@ export const buildExport = (extensions, template, meta) => {
 
     for (const extension of [...extensions].sort((a, b) => a.name.localeCompare(b.name))) {
         const platform = getPlatform(extension);
-        const link = (type) => (urls[type][platform] || '').replace('{EXTENSION_ID}', extension.id);
+        const link = (type) => (urls[type][platform] || '').replace('{EXTENSION_ID}', extension.id).replace('{BROWSER_VERSION}', meta.browserVersion);
         const homepageUrl = /^https?:\/\//i.test(extension.homepageUrl || '') ? extension.homepageUrl : '';
 
         const item = {
@@ -167,6 +167,8 @@ if (globalThis.chrome?.management) {
 
         const html = buildExport(extensions, template, {
             exporterVersion: chrome.runtime.getManifest().version,
+            // Chromium major version, for the CRX links (Edge reports Chrome/ in its user agent too)
+            browserVersion: `${navigator.userAgent.match(/Chrome\/(\d+)/)?.[1] || 140}.0`,
             generatorUrl: storeUrl,
             timestamp: new Date().toLocaleString().replace(',', ''),
             fileTimestamp,
