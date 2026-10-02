@@ -198,22 +198,8 @@
             color: var(--muted);
         }
 
-        .note {
-            max-width: 80ch;
-            margin: 0 0 12px;
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .note code {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--ink);
-        }
-
-        /* Hide empty sections, but keep Apps so its note explains why it can be empty */
-        .extensions > section:not(.apps):not(:has(tbody tr)),
-        .apps .table-wrap:not(:has(tbody tr)) {
+        /* Hide empty sections */
+        .extensions > section:not(:has(tbody tr)) {
             display: none;
         }
 
@@ -357,7 +343,6 @@
             }
 
             .toolbar,
-            .note,
             footer {
                 display: none;
             }
@@ -430,7 +415,6 @@
 
             <section class="apps">
                 <h2>Apps<span class="count">{COUNT_APPS}</span></h2>
-                <p class="note">Only legacy Chrome Apps can be listed here. Web apps added with "Install app" are hidden from extensions, so open <code>chrome://apps</code> or <code>edge://apps</code> to see those.</p>
                 <div class="table-wrap">
                     <table>
                         <thead>
@@ -570,7 +554,8 @@
                     .page p { margin: 0 0 10px; }
                     .fine-print { font-size: 13px; color: var(--muted); }`, `
                     <h1>Help</h1>
-                    <p>Extensions are listed in tables by whether they are enabled. Apps and themes have their own sections. Click a name to open its store page.</p>
+                    <p>Extensions are listed in tables by whether they are enabled. Themes and legacy Chrome Apps have their own sections. Click a name to open its store page.</p>
+                    <p>Web apps added with "Install app" are not visible to extensions, so open chrome://apps or edge://apps to see those.</p>
 
                     <h2>Buttons</h2>
                     <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, ready to copy, print, or save.</p>
@@ -582,9 +567,6 @@
                     <p><strong>IDs</strong> shows the ID column. Click an ID to copy it, for example to use in a browser policy.</p>
                     <p><strong>Stats links</strong> link to each extension's statistics on <a href="https://chrome-stats.com" target="_blank">Chrome-Stats.com</a> or <a href="https://edge-stats.com" target="_blank">Edge-Stats.com</a>, with user counts, ratings, and history.</p>
                     <p><strong>Security reports</strong> link to a <a href="https://crxaminer.tech" target="_blank">CRXaminer</a> analysis of the extension, covering its permissions, risk rating, and the remote servers it contacts. CRXaminer only covers extensions from the Chrome Web Store.</p>
-
-                    <h2>Apps</h2>
-                    <p>Only legacy Chrome Apps are visible to extensions. Web apps added with "Install app" are not, so open chrome://apps or edge://apps to see those.</p>
 
                     <h2>CRX files</h2>
                     <p>Browsers block CRX downloads started from a local HTML file, so CRX links are listed as text only. Download them with a tool like wget or curl. Extensions installed from a CRX file do not update automatically, so installing from the Chrome Web Store or Edge Add-ons is recommended.</p>

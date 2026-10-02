@@ -24,7 +24,7 @@ Available on both the [Chrome Web Store](https://chromewebstore.google.com/detai
 - **Cross-browser compatibility**: Currently functions on both Chrome and Edge browsers.
 - **Table Layout**: Each section is a table with name, version, ID, description, and links columns.
 - **Separate Enabled and Disabled Extensions**: Clearly distinguish between enabled and disabled extensions.
-- **Separate Apps and Themes**: Apps and themes are listed in their own sections instead of mixed in with extensions. Only legacy Chrome Apps are visible to extensions. Web apps added with "Install app" are not, so the export points you to `chrome://apps` or `edge://apps` for those.
+- **Separate Apps and Themes**: Apps and themes are listed in their own sections instead of mixed in with extensions. Only legacy Chrome Apps are visible to extensions, and their section is hidden when you have none. Web apps added with "Install app" are not visible, so the Help page points you to `chrome://apps` or `edge://apps` for those.
 - **Light and Dark Themes**: The export follows your system's light or dark setting, prints in light, and stays fully self-contained with no external fonts or files.
 - **Extension IDs**: Shows each extension's ID. Click an ID to copy it, which is handy for browser policies such as force-install lists.
 - **Copy AI Prompt**: Copies a ready-made prompt listing every extension by name, version, ID, and store. Paste it into any AI assistant to get a security and privacy review of what you have installed. Nothing is sent anywhere by the extension. You choose where to paste it.
