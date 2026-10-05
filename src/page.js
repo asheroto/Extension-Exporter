@@ -40,11 +40,11 @@ const getSection = (item) => {
 // ========================================================================== //
 // Convert the listing to CSV (RFC 4180 quoting, with a BOM so Excel reads UTF-8)
 // ========================================================================== //
-const CSV_COLUMNS = { name: 'Name', version: 'Version', id: 'ID', type: 'Type', enabled: 'Enabled', store: 'Store', description: 'Description', storeUrl: 'Store URL', crxLink: 'CRX Link', statsLink: 'Stats Link', securityLink: 'Security Report' };
+const CSV_COLUMNS = { name: 'Name', version: 'Version', id: 'ID', type: 'Type', enabled: 'Enabled', store: 'Store', description: 'Description', permissions: 'Permissions', storeUrl: 'Store URL', crxLink: 'CRX Link', statsLink: 'Stats Link', securityLink: 'Security Report' };
 
 export const toCsv = (listing) => {
     const cell = (value) => {
-        let text = String(value ?? '');
+        let text = Array.isArray(value) ? value.join(', ') : String(value ?? '');
         // A leading = + - @ tab or CR makes spreadsheets run the cell as a formula, so neutralize it
         if (/^[=+\-@\t\r]/.test(text)) text = `'${text}`;
         return `"${text.replace(/"/g, '""')}"`;
@@ -75,6 +75,8 @@ export const buildExport = (extensions, template, meta) => {
             enabled: extension.enabled,
             store: platform ? strings.storeLabel[platform] : '',
             description: extension.description,
+            // API permissions first, then host permissions (match patterns)
+            permissions: [...(extension.permissions ?? []), ...(extension.hostPermissions ?? [])],
             storeUrl: link('storeDetailUrl') || homepageUrl,
             crxLink: link('crxdownloadUrl'),
             statsLink: link('statsUrl'),
@@ -94,6 +96,7 @@ export const buildExport = (extensions, template, meta) => {
                     <td class="col-version">${esc(item.version)}</td>
                     <td class="col-id"><button type="button" class="ext-id" title="Copy ID">${esc(item.id)}</button></td>
                     <td class="col-description">${esc(item.description)}</td>
+                    <td class="col-permissions">${esc(item.permissions.join(', '))}</td>
                     <td class="col-links">
                         ${item.statsLink ? `<a class="link-stats" href="${esc(item.statsLink)}" target="_blank" title="Stats" aria-label="Stats for ${name}"><span class="icon icon-stats"></span></a>` : ''}
                         ${item.securityLink ? `<a class="link-security" href="${esc(item.securityLink)}" target="_blank" title="Security report" aria-label="Security report for ${name}"><span class="icon icon-security"></span></a>` : ''}

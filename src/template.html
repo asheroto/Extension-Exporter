@@ -132,6 +132,7 @@
         button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             padding: 6px 12px;
             font: inherit;
@@ -270,6 +271,13 @@
             color: var(--muted);
         }
 
+        .col-permissions {
+            width: 24%;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--muted);
+        }
+
         .ext-id {
             all: unset;
             font-family: var(--font-mono);
@@ -306,6 +314,7 @@
 
         /* Toggles */
         body:not(.show-ids) .col-id,
+        body:not(.show-permissions) .col-permissions,
         body:not(.show-stats-icons):not(.show-security-icons) .col-links,
         body:not(.show-stats-icons) .link-stats,
         body:not(.show-security-icons) .link-security {
@@ -381,6 +390,7 @@
             <div class="toolbar-group">
                 <span class="toolbar-label">Show</span>
                 <button id="toggleIds" type="button" aria-pressed="true">IDs</button>
+                <button id="togglePermissions" type="button" aria-pressed="false">Permissions</button>
                 <button id="toggleStats" type="button" aria-pressed="true"><span class="icon icon-stats"></span>Stats links</button>
                 <button id="toggleSecurity" type="button" aria-pressed="true"><span class="icon icon-security"></span>Security reports</button>
             </div>
@@ -392,7 +402,7 @@
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-permissions">Permissions</th><th class="col-links">Links</th></tr>
                         </thead>
                         <tbody>{ENABLED_EXTENSIONS}
                         </tbody>
@@ -405,7 +415,7 @@
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-permissions">Permissions</th><th class="col-links">Links</th></tr>
                         </thead>
                         <tbody>{DISABLED_EXTENSIONS}
                         </tbody>
@@ -418,7 +428,7 @@
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-permissions">Permissions</th><th class="col-links">Links</th></tr>
                         </thead>
                         <tbody>{APPS}
                         </tbody>
@@ -431,7 +441,7 @@
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-links">Links</th></tr>
+                            <tr><th class="col-name">Name</th><th class="col-version">Version</th><th class="col-id">ID</th><th class="col-description">Description</th><th class="col-permissions">Permissions</th><th class="col-links">Links</th></tr>
                         </thead>
                         <tbody>{THEMES}
                         </tbody>
@@ -462,6 +472,7 @@
                 button.addEventListener('click', () => button.setAttribute('aria-pressed', document.body.classList.toggle(className)));
             };
             bindToggle('toggleIds', 'show-ids');
+            bindToggle('togglePermissions', 'show-permissions');
             bindToggle('toggleStats', 'show-stats-icons');
             bindToggle('toggleSecurity', 'show-security-icons');
 
@@ -506,15 +517,20 @@
             // AI prompt: instructions plus a compact list an AI can look up by ID
             document.getElementById('copyAiPrompt').addEventListener('click', function () {
                 const button = this;
-                const group = (title, items) => items.length ? `\n${title}:\n${items.map((e) => `- ${e.name} ${e.version} (ID: ${e.id}${e.store ? ', ' + e.store : ', not from a store'})`).join('\n')}\n` : '';
+                const group = (title, items) => items.length ? `\n${title}:\n${items.map((e) => `- ${e.name} ${e.version} (ID: ${e.id}${e.store ? ', ' + e.store : ', not from a store'})\n  Permissions: ${e.permissions.join(', ') || 'none'}`).join('\n')}\n` : '';
                 const isApp = (e) => e.type.endsWith('app');
                 const prompt = `I exported the list of extensions installed in {BROWSER_NAME} with Extension Exporter. Do you see any extensions that could be a cause for concern on security or privacy?\n\n`
                     + `Review each one: what it does, who publishes it, and any known concerns such as a change of ownership, abandonment, data collection, or past malware reports. Use the extension ID to look it up in its store when you can. If you cannot identify an extension, say so instead of guessing.\n\n`
+                    + `Each extension's permissions are listed. Flag any that ask for more access than they need for what they do, such as access to all websites.\n\n`
+                    + `Find the date each store extension was last updated in its store:\n`
+                    + `- Chrome Web Store: the "Updated" date on https://chromewebstore.google.com/detail/<ID>\n`
+                    + `- Edge Add-ons: "lastUpdateDate" from https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/<ID>, a Unix timestamp in seconds. Convert it to my time zone, ${Intl.DateTimeFormat().resolvedOptions().timeZone}.\n`
+                    + `Show dates as YYYY-MM-DD. If you cannot fetch the date, write "Unknown" instead of guessing.\n\n`
                     + `Also check for:\n`
-                    + `- Outdated or dead extensions: far behind the latest release, removed from the store, or still built on Manifest V2, which browsers are phasing out.\n`
+                    + `- Outdated or dead extensions: not updated in its store for over two years, far behind the latest release, removed from the store, or still built on Manifest V2, which browsers are phasing out.\n`
                     + `- Overlap: extensions that do the same job (for example, two ad blockers), which can conflict or slow the browser.\n\n`
                     + `Format the answer in Markdown as:\n`
-                    + `1. A table with the columns Name, Publisher, Risk, and Why. Mark risk with an emoji followed by the word: "\u{1F7E2} Low risk", "\u{1F7E1} Medium risk", "\u{1F534} High risk", or "⚪ Unknown risk". Keep Why to one short phrase of 12 words or fewer, so the table fits on screen without scrolling.\n`
+                    + `1. A table with the columns Name, Publisher, Last updated, Risk, and Why. Mark risk with an emoji followed by the word: "\u{1F7E2} Low risk", "\u{1F7E1} Medium risk", "\u{1F534} High risk", or "⚪ Unknown risk". Keep Why to one short phrase of 12 words or fewer, so the table fits on screen without scrolling.\n`
                     + `2. A "# Summary" heading that answers the question above directly, with "## Security concerns", "## Outdated or dead", and "## Overlap" subsections. Put the detail there rather than in the table.\n`
                     + `3. A "# Recommended actions" heading listing what to remove, update, or replace, in priority order.\n`
                     + group('Enabled extensions', listing.filter((e) => e.type === 'extension' && e.enabled))
@@ -523,9 +539,11 @@
                     + group('Themes', listing.filter((e) => e.type === 'theme'));
 
                 navigator.clipboard.writeText(prompt).then(() => {
+                    // Hold the width so the toolbar does not reflow while the label is swapped
                     const label = button.innerHTML;
-                    button.textContent = 'Copied, paste into your AI assistant';
-                    setTimeout(() => { button.innerHTML = label; }, 3000);
+                    button.style.width = `${button.offsetWidth}px`;
+                    button.textContent = 'Copied!';
+                    setTimeout(() => { button.innerHTML = label; button.style.width = ''; }, 3000);
                 }).catch(() => openText(prompt));
             });
 
@@ -537,6 +555,7 @@
                 const entries = listing.map((extension) => `${extension.name} ${extension.version}${extension.enabled ? '' : ' (disabled)'}`
                     + (isShown('show-ids') ? line('ID', extension.id) : '')
                     + line('Description', extension.description)
+                    + (isShown('show-permissions') ? line('Permissions', extension.permissions.join(', ')) : '')
                     + line('Store URL', extension.storeUrl)
                     + line('CRX link', extension.crxLink)
                     + (isShown('show-stats-icons') ? line('Stats link', extension.statsLink) : '')
@@ -561,10 +580,11 @@
                     <p><strong>Text-only listing</strong> opens every extension as plain text, including CRX download links, ready to copy, print, or save.</p>
                     <p><strong>Download JSON</strong> saves the full listing, including IDs, descriptions, and all links.</p>
                     <p><strong>Download CSV</strong> saves the same listing as a file that opens in Excel or any spreadsheet app.</p>
-                    <p><strong>Copy AI prompt</strong> copies a ready-made prompt to your clipboard. Paste it into any AI assistant and it will review each extension by name and ID, flag known security or privacy concerns, and suggest any worth removing. Only names, versions, IDs, and store names are included. Nothing is sent anywhere by the extension. You choose where to paste it. If the clipboard is blocked, the prompt opens as text to copy by hand.</p>
+                    <p><strong>Copy AI prompt</strong> copies a ready-made prompt to your clipboard. Paste it into any AI assistant and it will review each extension by name and ID, flag known security or privacy concerns, and suggest any worth removing. Only names, versions, IDs, store names, and permissions are included. Nothing is sent anywhere by the extension. You choose where to paste it. If the clipboard is blocked, the prompt opens as text to copy by hand.</p>
 
                     <h2>Show</h2>
                     <p><strong>IDs</strong> shows the ID column. Click an ID to copy it, for example to use in a browser policy.</p>
+                    <p><strong>Permissions</strong> shows the Permissions column: what each extension can access, such as tabs or storage, followed by the websites it can read and change. When on, permissions are also included in the text-only listing. The AI prompt, JSON, and CSV always include them.</p>
                     <p><strong>Stats links</strong> link to each extension's statistics on <a href="https://chrome-stats.com" target="_blank">Chrome-Stats.com</a> or <a href="https://edge-stats.com" target="_blank">Edge-Stats.com</a>, with user counts, ratings, and history.</p>
                     <p><strong>Security reports</strong> link to a <a href="https://crxaminer.tech" target="_blank">CRXaminer</a> analysis of the extension, covering its permissions, risk rating, and the remote servers it contacts. CRXaminer only covers extensions from the Chrome Web Store.</p>
 

@@ -8,7 +8,7 @@ const chromeUpdate = 'https://clients2.google.com/service/update2/crx';
 const edgeUpdate = 'https://edge.microsoft.com/extensionwebstorebase/v1/crx';
 
 const extensions = [
-    { id: 'a'.repeat(32), name: '<img src=x onerror=alert(1)>', version: '1.0', type: 'extension', enabled: true, description: 'Says "hi" & <b>bye</b>', updateUrl: chromeUpdate },
+    { id: 'a'.repeat(32), name: '<img src=x onerror=alert(1)>', version: '1.0', type: 'extension', enabled: true, description: 'Says "hi" & <b>bye</b>', updateUrl: chromeUpdate, permissions: ['tabs', 'storage'], hostPermissions: ['<all_urls>'] },
     { id: 'b'.repeat(32), name: "Price $' {TIMESTAMP}", version: '2.0', type: 'extension', enabled: false, description: '', updateUrl: edgeUpdate },
     { id: 'c'.repeat(32), name: 'Local Dev', version: '0.1', type: 'extension', enabled: true, description: '', homepageUrl: 'javascript:alert(1)' },
     { id: 'd'.repeat(32), name: 'Docs App', version: '3.0', type: 'hosted_app', enabled: false, description: '', updateUrl: chromeUpdate },
@@ -59,12 +59,18 @@ assert.equal(listing.find((x) => x.type === 'theme').name, 'Dark Theme');
 assert.equal(listing[0].name, extensions[0].name, 'JSON keeps original text');
 assert.deepEqual(listing.map((x) => x.store), ['Chrome Web Store', 'Chrome Web Store', 'Chrome Web Store', '', 'Edge Add-ons'], 'store label per item');
 
+// Permissions: API then host, escaped in the table, empty for items without any
+assert.deepEqual(listing[0].permissions, ['tabs', 'storage', '<all_urls>']);
+assert.deepEqual(listing[1].permissions, []);
+assert.ok(html.includes('<td class="col-permissions">tabs, storage, &lt;all_urls&gt;</td>'));
+
 // CSV: embedded copy matches, and it survives HTML parsing (no raw CR in the attribute)
 const csv = toCsv(listing);
 assert.equal(unescape(html.match(/data-csv="([^"]*)"/)[1]), csv);
 assert.ok(!html.match(/data-csv="([^"]*)"/)[1].includes('\r'));
 assert.ok(csv.startsWith('﻿"Name","Version","ID"'), 'BOM and header row');
 assert.equal(csv.split('\r\n').length, 6, 'header plus one row per item');
+assert.ok(csv.includes('"tabs, storage, <all_urls>"'), 'permissions joined into one CSV cell');
 
 // CSV: quotes are doubled, and formula-looking cells are neutralized
 const row = toCsv([{ name: '=HYPERLINK("http://evil")', version: '-1', id: '@x', description: 'a "b", c\nd', enabled: false }]).split('\r\n')[1];
